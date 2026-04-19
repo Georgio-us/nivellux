@@ -1,0 +1,17 @@
+html { scroll-behavior: smooth; }
+.faq-content { transition: all 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+.faq-item.active .faq-content { max-height: 400px; opacity: 1; margin-top: 1rem; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.3s ease; }
+.hero-overlay { background-size: cover; background-position: center; position: relative; }
+.hero-overlay::before { content: ''; position: absolute; inset: 0; background: rgba(4,31,50, 0.85); }
+.hero-overlay > * { position: relative; z-index: 10; }
+.bg-image-overlay-card { background-size: cover; background-position: center; position: relative; }
+.bg-image-overlay-card::before { content: ''; position: absolute; inset: 0; background: rgba(4,31,50, 0.85); border-radius: inherit; transition: background 0.3s ease; }
+.bg-image-overlay-card:hover::before { background: rgba(4,31,50, 0.70); }
+.bg-image-overlay-card > * { position: relative; z-index: 10; }
+.bg-image-overlay { background-size: cover; background-position: center; position: relative; }
+.bg-image-overlay::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,31,50,0.95) 0%, rgba(4,31,50,0.4) 100%); border-radius: inherit; }
+.bg-image-overlay > * { position: relative; z-index: 10; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

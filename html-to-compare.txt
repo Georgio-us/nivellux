@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ремонт под ключ в Валенсии | NIVELLUX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-brand-dark font-sans antialiased relative">
+
+    <!-- HEADER & HERO SECTION -->
+    <div class="hero-overlay text-white pb-24" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="container mx-auto px-6 max-w-7xl relative">
+            <header class="flex justify-between items-center py-6">
+                <div class="text-2xl font-bold tracking-wider relative z-50">NIVELLUX</div>
+                <nav id="desktop-menu" class="hidden md:flex gap-8 text-sm text-gray-300">
+                    <a href="#services" class="hover:text-brand-accent transition" data-i18n="nav_services">Услуги</a>
+                    <a href="#why-us" class="hover:text-brand-accent transition" data-i18n="nav_benefits">Преимущества</a>
+                    <a href="#process" class="hover:text-brand-accent transition" data-i18n="nav_process">Этапы</a>
+                    <a href="#portfolio" class="hover:text-brand-accent transition" data-i18n="nav_portfolio">Объекты</a>
+                    <a href="#reviews" class="hover:text-brand-accent transition" data-i18n="nav_reviews">Отзывы</a>
+                    <a href="#faq" class="hover:text-brand-accent transition" data-i18n="nav_faq">FAQ</a>
+                    <a href="#blog" class="hover:text-brand-accent transition" data-i18n="nav_blog">Блог</a>
+                </nav>
+                <div class="flex items-center gap-6 relative z-50">
+                    <div class="relative group cursor-pointer">
+                        <div class="flex items-center gap-1 text-sm font-semibold hover:text-brand-accent transition">
+                            <span id="current-lang">RU</span><i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </div>
+                        <div class="absolute right-0 mt-2 w-20 bg-white text-brand-dark rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all overflow-hidden border border-gray-100">
+                            <div class="px-4 py-2 hover:bg-brand-light text-sm font-semibold transition" onclick="setLanguage('ru')">RU</div>
+                            <div class="px-4 py-2 hover:bg-brand-light text-sm font-semibold transition" onclick="setLanguage('es')">ES</div>
+                            <div class="px-4 py-2 hover:bg-brand-light text-sm font-semibold transition" onclick="setLanguage('uk')">UK</div>
+                        </div>
+                    </div>
+                    <button onclick="openConsultationModal()" class="hidden md:block bg-brand-accent text-white px-8 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition" data-i18n="btn_consultation">Консультация</button>
+                    <button id="mobile-menu-btn" class="md:hidden block text-white hover:text-brand-accent transition"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                </div>
+            </header>
+
+            <div id="mobile-menu" class="fixed inset-0 bg-brand-dark z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center gap-6 text-xl hidden">
+                <a href="#services" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_services">Услуги</a>
+                <a href="#why-us" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_benefits">Преимущества</a>
+                <a href="#process" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_process">Этапы</a>
+                <a href="#portfolio" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_portfolio">Объекты</a>
+                <a href="#reviews" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_reviews">Отзывы</a>
+                <a href="#faq" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_faq">FAQ</a>
+                <a href="#blog" class="mobile-link text-white hover:text-brand-accent transition" data-i18n="nav_blog">Блог</a>
+                <button onclick="openConsultationModal(); document.getElementById('mobile-menu-btn').click();" class="bg-brand-accent text-white px-8 py-3 rounded-full text-sm font-semibold mt-4" data-i18n="btn_consultation">Консультация</button>
+            </div>
+
+            <div class="mt-20 max-w-3xl relative z-10">
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6" data-i18n="hero_title">РЕМОНТ ПОД КЛЮЧ В ВАЛЕНСИИ И ПРИГОРОДЕ</h1>
+                <p class="text-gray-300 text-lg mb-10 max-w-xl leading-relaxed" data-i18n="hero_desc">Создаем идеальные интерьеры для жизни и бизнеса. Берем на себя всё: от разработки дизайн-проекта и получения лицензий (Licencia de obra) до финальной уборки.</p>
+                <div class="flex gap-4 flex-wrap">
+                    <button onclick="openEstimateModal()" class="bg-brand-accent text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition" data-i18n="btn_estimate">Рассчитать смету</button>
+                    <button onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-brand-dark transition text-center" data-i18n="btn_our_projects">Наши объекты</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- УСЛУГИ -->
+    <section id="services" class="py-24">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-4" data-i18n="services_title">НАШИ УСЛУГИ</h2>
+                <p class="text-gray-500 max-w-2xl" data-i18n="services_desc">Выполняем полный цикл строительно-отделочных работ с соблюдением испанских норм и европейских стандартов качества.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Карточка 1 -->
+                <div onclick="openComplexModal()" class="bg-brand-light rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start w-full mb-6">
+                        <div class="bg-brand-accent/10 text-brand-accent p-4 rounded-2xl"><i data-lucide="home" class="w-8 h-8"></i></div>
+                        <button type="button" onclick="openComplexModal(); event.stopPropagation();" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark group-hover:bg-brand-accent group-hover:text-white transition shadow-sm focus:outline-none"><i data-lucide="arrow-up-right" class="w-5 h-5 pointer-events-none"></i></button>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="serv_1_title">Комплексный ремонт</h3>
+                    <p class="text-sm text-gray-600" data-i18n="serv_1_desc">Капитальный ремонт квартир и вилл под ключ. Демонтаж, коммуникации, черновая и чистовая отделка.</p>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="bg-image-overlay-card text-white rounded-[32px] p-8 flex flex-col items-start justify-center text-center items-center hover:-translate-y-1 transition duration-300 overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    <h3 class="text-xl font-bold mb-3" data-i18n="serv_2_title">Дизайн-интерьера</h3>
+                    <button type="button" onclick="openDesignModal()" class="border border-white/30 px-6 py-2 rounded-full text-sm mt-4 hover:bg-brand-accent hover:border-brand-accent transition focus:outline-none" data-i18n="btn_details">Подробнее</button>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div onclick="openCommercialModal()" class="bg-brand-light rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start w-full mb-6">
+                        <div class="bg-brand-accent/10 text-brand-accent p-4 rounded-2xl"><i data-lucide="store" class="w-8 h-8"></i></div>
+                        <button type="button" onclick="openCommercialModal(); event.stopPropagation();" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark group-hover:bg-brand-accent group-hover:text-white transition shadow-sm focus:outline-none"><i data-lucide="arrow-up-right" class="w-5 h-5 pointer-events-none"></i></button>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="serv_3_title">Ремонт коммерции</h3>
+                    <p class="text-sm text-gray-600" data-i18n="serv_3_desc">Адаптация помещений под рестораны, офисы и магазины. Согласование проекта с Ayuntamiento.</p>
+                </div>
+
+                <!-- Карточка 4 -->
+                <div class="bg-image-overlay-card text-white rounded-[32px] p-8 flex flex-col items-start justify-center text-center items-center hover:-translate-y-1 transition duration-300 overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                    <h3 class="text-xl font-bold mb-3" data-i18n="serv_4_title">Инженерные сети</h3>
+                    <button type="button" onclick="openEngineeringModal()" class="border border-white/30 px-6 py-2 rounded-full text-sm mt-4 hover:bg-brand-accent hover:border-brand-accent transition focus:outline-none" data-i18n="btn_details">Подробнее</button>
+                </div>
+
+                <!-- Карточка 5 -->
+                <div onclick="openLicensesModal()" class="bg-brand-light rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition duration-300 cursor-pointer group">
+                    <div class="flex justify-between items-start w-full mb-6">
+                        <div class="bg-brand-accent/10 text-brand-accent p-4 rounded-2xl"><i data-lucide="file-check-2" class="w-8 h-8"></i></div>
+                        <button type="button" onclick="openLicensesModal(); event.stopPropagation();" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-dark group-hover:bg-brand-accent group-hover:text-white transition shadow-sm focus:outline-none"><i data-lucide="arrow-up-right" class="w-5 h-5 pointer-events-none"></i></button>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="serv_5_title">Лицензии и проекты</h3>
+                    <p class="text-sm text-gray-600 mb-6" data-i18n="serv_5_desc">Помощь архитектора в получении Licencia de obra mayor/menor и смене назначения.</p>
+                </div>
+
+                <!-- Карточка 6 -->
+                <div class="bg-image-overlay-card text-white rounded-[32px] p-8 flex flex-col items-start justify-center text-center items-center hover:-translate-y-1 transition duration-300 overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                    <h3 class="text-xl font-bold mb-3" data-i18n="serv_6_title">Умный дом (Domótica)</h3>
+                    <button type="button" onclick="openSmartHomeModal()" class="border border-white/30 px-6 py-2 rounded-full text-sm mt-4 hover:bg-brand-accent hover:border-brand-accent transition focus:outline-none" data-i18n="btn_details">Подробнее</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОЧЕМУ МЫ -->
+    <section id="why-us" class="py-16">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6" data-i18n="why_title">ПОЧЕМУ ВЫБИРАЮТ НАС</h2>
+                    <p class="text-gray-500 mb-6" data-i18n="why_desc">Ремонт в Испании имеет свою специфику: от местной бюрократии до особенностей планировок старого фонда. Мы знаем, как обойти все подводные камни и сдать объект без задержек.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="bg-brand-light rounded-[24px] p-6 flex gap-6 items-start">
+                        <div class="bg-white text-brand-accent p-3 rounded-xl shadow-sm"><i data-lucide="calculator" class="w-6 h-6"></i></div>
+                        <div><h4 class="font-bold mb-1" data-i18n="why_1_title">Твердая смета</h4><p class="text-sm text-gray-600" data-i18n="why_1_desc">Стоимость работ фиксируется в договоре и не увеличивается в процессе ремонта.</p></div>
+                    </div>
+                    <div class="bg-brand-light rounded-[24px] p-6 flex gap-6 items-start">
+                        <div class="bg-white text-brand-accent p-3 rounded-xl shadow-sm"><i data-lucide="clock" class="w-6 h-6"></i></div>
+                        <div><h4 class="font-bold mb-1" data-i18n="why_2_title">Соблюдение сроков</h4><p class="text-sm text-gray-600" data-i18n="why_2_desc">Мы ценим ваше время. За каждый день просрочки прописаны штрафные санкции.</p></div>
+                    </div>
+                    <div class="bg-brand-light rounded-[24px] p-6 flex gap-6 items-start">
+                        <div class="bg-white text-brand-accent p-3 rounded-xl shadow-sm"><i data-lucide="hard-hat" class="w-6 h-6"></i></div>
+                        <div><h4 class="font-bold mb-1" data-i18n="why_3_title">Штатные бригады</h4><p class="text-sm text-gray-600" data-i18n="why_3_desc">Никаких случайных людей. Работают только проверенные профильные мастера.</p></div>
+                    </div>
+                    <div class="bg-brand-light rounded-[24px] p-6 flex gap-6 items-start">
+                        <div class="bg-white text-brand-accent p-3 rounded-xl shadow-sm"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                        <div><h4 class="font-bold mb-1" data-i18n="why_4_title">Официальная гарантия</h4><p class="text-sm text-gray-600" data-i18n="why_4_desc">Предоставляем гарантию на все черновые и инженерные работы от 3 до 5 лет.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER -->
+    <section class="py-12">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="bg-brand-dark text-white rounded-[40px] p-12 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="max-w-xl">
+                    <h3 class="text-2xl font-bold mb-2" data-i18n="banner_title">НАЧНИТЕ РЕМОНТ БЕЗ СТРЕССА</h3>
+                    <p class="text-gray-300" data-i18n="banner_desc">ЗАПИШИТЕСЬ НА БЕСПЛАТНЫЙ ВЫЕЗД ИНЖЕНЕРА ДЛЯ ЗАМЕРА И ОЦЕНКИ ОБЪЕКТА</p>
+                </div>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="tel:+34644791777" class="bg-brand-accent text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition whitespace-nowrap inline-block text-center" data-i18n="btn_call">Позвонить</a>
+                    <button onclick="openConsultationModal()" class="border border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-brand-dark transition whitespace-nowrap" data-i18n="btn_leave_request">Оставить заявку</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭТАПЫ РАБОТЫ -->
+    <section id="process" class="py-24">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex justify-between items-end mb-12">
+                <div><h2 class="text-3xl font-bold mb-2" data-i18n="process_title">КАК МЫ РАБОТАЕМ</h2></div>
+                <button type="button" onclick="openConsultationModal()" class="text-sm font-semibold border-b border-brand-accent text-brand-accent pb-1 hover:opacity-80 transition focus:outline-none" data-i18n="btn_learn_more">Узнать подробнее</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-6">
+                    <div class="bg-brand-light rounded-[32px] p-8 flex gap-6 items-start">
+                        <div class="text-5xl font-light text-brand-dark/20">1</div>
+                        <div><h4 class="text-xl font-bold mb-2" data-i18n="proc_1_title">Замер и консультация</h4><p class="text-sm text-gray-600" data-i18n="proc_1_desc">Наш инженер выезжает на объект в Валенсии, проводит точные замеры и оценивает техническое состояние.</p></div>
+                    </div>
+                    <div class="bg-brand-light rounded-[32px] p-8 flex gap-6 items-start">
+                        <div class="text-5xl font-light text-brand-dark/20">2</div>
+                        <div><h4 class="text-xl font-bold mb-2" data-i18n="proc_2_title">Смета и договор</h4><p class="text-sm text-gray-600" data-i18n="proc_2_desc">Составляем прозрачную смету с детализацией работ и материалов. Подписываем официальный контракт.</p></div>
+                    </div>
+                    <div class="bg-brand-light rounded-[32px] p-8 flex gap-6 items-start">
+                        <div class="text-5xl font-light text-brand-dark/20">3</div>
+                        <div><h4 class="text-xl font-bold mb-2" data-i18n="proc_3_title">Подготовка и закупка</h4><p class="text-sm text-gray-600" data-i18n="proc_3_desc">Оформляем разрешения (Licencia), закупаем и завозим материалы. Защищаем зоны общего пользования.</p></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <div class="bg-brand-light rounded-[32px] p-8 flex gap-6 items-start">
+                        <div class="text-5xl font-light text-brand-dark/20">4</div>
+                        <div><h4 class="text-xl font-bold mb-2" data-i18n="proc_4_title">Строительные работы</h4><p class="text-sm text-gray-600" data-i18n="proc_4_desc">Выполняем демонтаж, возведение стен, разводку электрики, сантехники и чистовую отделку строго по графику.</p></div>
+                    </div>
+                    <div class="bg-brand-light rounded-[32px] p-8 flex gap-6 items-start">
+                        <div class="text-5xl font-light text-brand-dark/20">5</div>
+                        <div><h4 class="text-xl font-bold mb-2" data-i18n="proc_5_title">Сдача объекта</h4><p class="text-sm text-gray-600" data-i18n="proc_5_desc">Проводим клининг, вывозим остатки мусора и передаем вам ключи от полностью готового и чистого помещения.</p></div>
+                    </div>
+                    <div onclick="openConsultationModal()" class="bg-brand-dark text-white rounded-[32px] p-8 flex items-center justify-center h-full cursor-pointer hover:bg-brand-accent transition group">
+                        <span class="text-lg font-semibold flex items-center gap-2"><span data-i18n="btn_call_engineer">ВЫЗВАТЬ ИНЖЕНЕРА</span> <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНЫЙ БЛОК: ОБЪЕКТЫ/ПОРТФОЛИО -->
+    <section id="portfolio" class="py-16">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex justify-between items-end mb-10">
+                <h2 class="text-3xl font-bold max-w-md leading-tight" data-i18n="portf_title">НАШИ ОБЪЕКТЫ<br>КОТОРЫМИ МЫ ГОРДИМСЯ</h2>
+                <div class="hidden md:flex gap-4">
+                    <button id="slider-prev" class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center hover:bg-brand-accent hover:text-white transition cursor-pointer text-brand-dark"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
+                    <button id="slider-next" class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center hover:bg-brand-accent hover:text-white transition cursor-pointer text-brand-dark"><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden w-full">
+                <div id="portfolio-track" class="flex transition-transform duration-500 ease-in-out gap-6">
+                    <!-- Cards -->
+                    <div onclick="openPortfolioModal('proj1')" class="w-full shrink-0 md:w-[calc(50%-12px)] bg-image-overlay rounded-[40px] aspect-[4/3] p-10 flex flex-col justify-between text-white group cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold border border-white/10" data-i18n="portf_1_tag">Апартаменты • Ruzafa</div>
+                            <div class="bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-brand-accent transition"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                        </div>
+                        <div class="mt-auto relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-accent transition" data-i18n="portf_1_title">Капитальный ремонт 90 м²</h3>
+                            <p class="text-gray-300 text-sm max-w-sm" data-i18n="portf_1_desc">Полная перепланировка в историческом фонде, сохранение оригинальной кирпичной кладки.</p>
+                        </div>
+                    </div>
+                    <div onclick="openPortfolioModal('proj2')" class="w-full shrink-0 md:w-[calc(50%-12px)] bg-image-overlay rounded-[40px] aspect-[4/3] p-10 flex flex-col justify-between text-white group cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold border border-white/10" data-i18n="portf_2_tag">Дом • El Cabañal</div>
+                            <div class="bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-brand-accent transition"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                        </div>
+                        <div class="mt-auto relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-accent transition" data-i18n="portf_2_title">Реконструкция таунхауса</h3>
+                            <p class="text-gray-300 text-sm max-w-sm" data-i18n="portf_2_desc">Восстановление фасада, создание открытой террасы на крыше, монтаж системы "Умный дом".</p>
+                        </div>
+                    </div>
+                    <div onclick="openPortfolioModal('proj3')" class="w-full shrink-0 md:w-[calc(50%-12px)] bg-image-overlay rounded-[40px] aspect-[4/3] p-10 flex flex-col justify-between text-white group cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold border border-white/10" data-i18n="portf_3_tag">Ресторан • Av. de França, 14</div>
+                            <div class="bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-brand-accent transition"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                        </div>
+                        <div class="mt-auto relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-accent transition" data-i18n="portf_3_title">Ресторан Pasqual&Sheila</h3>
+                            <p class="text-gray-300 text-sm max-w-sm" data-i18n="portf_3_desc">Полная адаптация помещения под требования ресторана, обустройство профессиональной кухни.</p>
+                        </div>
+                    </div>
+                    <div onclick="openPortfolioModal('proj4')" class="w-full shrink-0 md:w-[calc(50%-12px)] bg-image-overlay rounded-[40px] aspect-[4/3] p-10 flex flex-col justify-between text-white group cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold border border-white/10" data-i18n="portf_4_tag">Апартаменты • Ciutat Vella</div>
+                            <div class="bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-brand-accent transition"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                        </div>
+                        <div class="mt-auto relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-accent transition" data-i18n="portf_4_title">Ремонт апартаментов</h3>
+                            <p class="text-gray-300 text-sm max-w-sm" data-i18n="portf_4_desc">Реализация эксклюзивного дизайн-проекта с использованием премиальных материалов.</p>
+                        </div>
+                    </div>
+                    <div onclick="openPortfolioModal('proj5')" class="w-full shrink-0 md:w-[calc(50%-12px)] bg-image-overlay rounded-[40px] aspect-[4/3] p-10 flex flex-col justify-between text-white group cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold border border-white/10" data-i18n="portf_5_tag">Салон красоты • Plaça de Vannes, 6</div>
+                            <div class="bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-brand-accent transition"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                        </div>
+                        <div class="mt-auto relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-accent transition" data-i18n="portf_5_title">Салон красоты Misha</h3>
+                            <p class="text-gray-300 text-sm max-w-sm" data-i18n="portf_5_desc">Обустройство рабочих зон, специальное освещение с правильным индексом цветопередачи.</p>
+                        </div>
+                    </div>
+                    <div onclick="openPortfolioModal('proj6')" class="w-full shrink-0 md:w-[calc(50%-12px)] bg-image-overlay rounded-[40px] aspect-[4/3] p-10 flex flex-col justify-between text-white group cursor-pointer" style="background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold border border-white/10" data-i18n="portf_6_tag">Квартира • Eixample</div>
+                            <div class="bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-brand-accent transition"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                        </div>
+                        <div class="mt-auto relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-accent transition" data-i18n="portf_6_title">Комплексный ремонт квартиры</h3>
+                            <p class="text-gray-300 text-sm max-w-sm" data-i18n="portf_6_desc">Светлая и просторная квартира для молодой семьи. Черновая и чистовая отделка.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center gap-2 mt-8" id="portfolio-pagination"></div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section id="reviews" class="py-16">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <h2 class="text-3xl font-bold mb-10 text-center md:text-left" data-i18n="reviews_title">ОТЗЫВЫ КЛИЕНТОВ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-brand-light rounded-[32px] p-8 flex flex-col justify-between hover:shadow-lg transition">
+                    <div>
+                        <div class="flex text-brand-accent mb-4"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
+                        <p class="text-sm text-gray-700 italic mb-6" data-i18n="rev_1_text">«Ребята делали ремонт в нашей новой квартире в Бенимаклете. Сделали всё под ключ, мы находились в другой стране и контролировали процесс по фото и видео. Качество супер!»</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center font-bold text-brand-dark shadow-sm">АМ</div>
+                        <div><h4 class="font-bold text-sm" data-i18n="rev_1_name">Алексей М.</h4><span class="text-xs text-gray-500" data-i18n="rev_1_obj">Квартира 75 м²</span></div>
+                    </div>
+                </div>
+                <div class="bg-brand-dark text-white rounded-[32px] p-8 flex flex-col justify-between hover:shadow-lg transition">
+                    <div>
+                        <div class="flex text-brand-accent mb-4"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i></div>
+                        <p class="text-sm text-gray-300 italic mb-6" data-i18n="rev_2_text">«Долго искали подрядчика для ремонта коммерческого помещения под кафе. NIVELLUX взяли на себя всё: от лицензии Proyecto de Actividad до расстановки столов. Открылись вовремя.»</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-accent rounded-full flex items-center justify-center font-bold text-white shadow-sm">EM</div>
+                        <div><h4 class="font-bold text-sm" data-i18n="rev_2_name">Елена Миронова</h4><span class="text-xs text-gray-400" data-i18n="rev_2_obj">Кафетерий, Eixample</span></div>
+                    </div>
+                </div>
+                <div class="bg-brand-light rounded-[32px] p-8 flex flex-col justify-between hover:shadow-lg transition">
+                    <div>
+                        <div class="flex text-brand-accent mb-4"><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current"></i><i data-lucide="star" class="w-5 h-5 fill-current text-gray-300"></i></div>
+                        <p class="text-sm text-gray-700 italic mb-6" data-i18n="rev_3_text">«Отличная коммуникация. Прораб всегда на связи, смета прозрачная. Была небольшая задержка с поставкой плитки, но мастера успели нагнать сроки за счет малярки.»</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center font-bold text-brand-dark shadow-sm">DK</div>
+                        <div><h4 class="font-bold text-sm" data-i18n="rev_3_name">Дмитрий К.</h4><span class="text-xs text-gray-500" data-i18n="rev_3_obj">Апартаменты, Патерна</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СТАТИСТИКА -->
+    <section class="py-16 border-y border-gray-200 mt-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-wrap justify-between items-center text-center md:text-left gap-8">
+                <div><div class="text-5xl md:text-6xl font-light mb-2 text-brand-dark">120+</div><div class="text-xs font-bold uppercase tracking-widest text-brand-accent" data-i18n="stat_1">Сданных объектов</div></div>
+                <div><div class="text-5xl md:text-6xl font-light mb-2 text-brand-dark">7</div><div class="text-xs font-bold uppercase tracking-widest text-brand-accent" data-i18n="stat_2">Лет в Испании</div></div>
+                <div><div class="text-5xl md:text-6xl font-light mb-2 text-brand-dark">25</div><div class="text-xs font-bold uppercase tracking-widest text-brand-accent" data-i18n="stat_3">Мастеров в штате</div></div>
+                <div><div class="text-5xl md:text-6xl font-light mb-2 text-brand-dark">3</div><div class="text-xs font-bold uppercase tracking-widest text-brand-accent" data-i18n="stat_4">Года гарантии</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ВИДЕО -->
+    <section class="py-24">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="w-full lg:w-1/2 bg-image-overlay rounded-[40px] aspect-video flex items-center justify-center cursor-pointer group hover:opacity-90 transition" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                    <div class="bg-brand-accent/80 p-6 rounded-full backdrop-blur-sm group-hover:scale-110 transition"><i data-lucide="play" class="w-10 h-10 text-white fill-white ml-1"></i></div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6" data-i18n="video_title">РУМТУР: ГОТОВЫЙ ОБЪЕКТ В ЦЕНТРЕ ВАЛЕНСИИ</h2>
+                    <p class="text-gray-500 mb-8 max-w-lg" data-i18n="video_desc">Посмотрите наш видео-отчет с недавно завершенного объекта. Мы показываем качество финишной отделки, стыки материалов, работу инженерных систем.</p>
+                    <button class="bg-brand-dark text-white px-10 py-4 rounded-full font-semibold hover:bg-brand-accent transition" data-i18n="btn_all_video">Смотреть все видео</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТЕХНОЛОГИИ/МАТЕРИАЛЫ -->
+    <section class="py-16">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <h2 class="text-3xl font-bold mb-10" data-i18n="tech_title">МАТЕРИАЛЫ И РЕШЕНИЯ</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_1_pre">Идеально ровные стены.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_1_title">Машинная штукатурка</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_1_desc">Забываем о кривых стенах старого фонда. Используем механизированное нанесение и лазерные уровни для создания безупречной геометрии под покраску.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_2_pre">Фундамент для вашего покрытия.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_2_title">Лазерная стяжка пола</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_2_desc">Никаких перепадов высот. Создаем идеально ровное основание, на которое плитка или ламинат ложатся без лишнего расхода клея и скрипа.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_3_pre">Безопасность и надежность.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_3_title">Инженерные сети 2.0</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_3_desc">Полная замена старой проводки и труб на современные системы. Проектируем щитки с защитой от скачков напряжения и коллекторную разводку воды.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_4_pre">Здоровый микроклимат.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_4_title">Стоп-плесень и влага</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_4_desc">Специализированная гидроизоляция «мокрых» зон и антигрибковая обработка стен. Решаем проблему влажности, типичную для климата Испании.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_5_pre">Экономия на счетах.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_5_title">Энергосбережение</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_5_desc">Установка окон с терморазрывом и утепление контуров. Ваш дом сохраняет тепло зимой и прохладу летом, снижая расходы на кондиционер.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_6_pre">Тишина в квартире.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_6_title">Шумоизоляция</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_6_desc">Используем современные мембраны (Copopren, Danosa) для защиты от шума соседей и улицы. Создаем «акустический кокон» в спальнях и детских.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_7_pre">Эстетика и практичность.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_7_title">Финишная малярка</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_7_desc">Стены под покраску со стеклохолстом (защита от трещин). Используем износостойкие краски, которые не выгорают и легко моются.</p>
+                </div>
+                <div class="bg-brand-light rounded-[24px] p-6 flex flex-col items-start hover:-translate-y-1 transition duration-300">
+                    <span class="text-[10px] uppercase font-bold text-brand-accent tracking-widest mb-3" data-i18n="tech_8_pre">Современный минимализм.</span><h4 class="font-bold mb-2 text-lg text-brand-dark" data-i18n="tech_8_title">Скрытые системы</h4><p class="text-xs text-gray-600 leading-relaxed" data-i18n="tech_8_desc">Интегрируем скрытые двери (Invisible), теневые профили и встроенные люки. Весь технологический «шум» спрятан, остается только чистый дизайн.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl font-bold mb-10 text-center md:text-left" data-i18n="faq_title">ЧАСТЫЕ ВОПРОСЫ</h2>
+            <div class="flex flex-col gap-4 faq-container">
+                <div class="faq-item active bg-brand-dark text-white rounded-[24px] overflow-hidden shadow-lg border border-brand-accent/20">
+                    <button class="w-full px-8 py-6 flex justify-between items-center text-left font-semibold">
+                        <span data-i18n="faq_1_q">Сколько стоит квадратный метр ремонта под ключ?</span><i data-lucide="chevron-down" class="w-5 h-5 faq-icon text-brand-accent"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-6 text-gray-300 text-sm" data-i18n="faq_1_a">Стоимость зависит от состояния объекта и уровня отделки. В среднем капитальный ремонт "под ключ" в Валенсии начинается от 600€ до 900€ за квадратный метр. Точная цифра фиксируется в смете после замера.</div>
+                </div>
+                <div class="faq-item bg-brand-light text-brand-dark rounded-[24px] overflow-hidden">
+                    <button class="w-full px-8 py-6 flex justify-between items-center text-left font-semibold">
+                        <span data-i18n="faq_2_q">Вы помогаете с получением лицензии (Licencia de obra)?</span><i data-lucide="chevron-down" class="w-5 h-5 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-6 text-gray-300 text-sm" data-i18n="faq_2_a">Да. Наш архитектор подготовит проект (Proyecto técnico) для мэрии, подаст декларацию (Declaración responsable) для мелких работ или получит полноценную лицензию для масштабных изменений.</div>
+                </div>
+                <div class="faq-item bg-brand-light text-brand-dark rounded-[24px] overflow-hidden">
+                    <button class="w-full px-8 py-6 flex justify-between items-center text-left font-semibold">
+                        <span data-i18n="faq_3_q">Нужно ли мое присутствие в Валенсии во время ремонта?</span><i data-lucide="chevron-down" class="w-5 h-5 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-6 text-gray-300 text-sm" data-i18n="faq_3_a">Нет, многие наши клиенты живут в других странах. Мы предоставляем еженедельные фото- и видеоотчеты о проделанной работе, а все текущие вопросы решаем дистанционно.</div>
+                </div>
+                <div class="faq-item bg-brand-light text-brand-dark rounded-[24px] overflow-hidden">
+                    <button class="w-full px-8 py-6 flex justify-between items-center text-left font-semibold">
+                        <span data-i18n="faq_4_q">Помогаете ли вы с закупкой чистовых материалов?</span><i data-lucide="chevron-down" class="w-5 h-5 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-8 pb-6 text-gray-300 text-sm" data-i18n="faq_4_a">Да, мы можем сопроводить вас в шоурумы наших партнеров в Валенсии, поможем с выбором плитки, сантехники и ламината, а также организуем их доставку и подъем на объект.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОГ / СТАТЬИ -->
+    <section id="blog" class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex justify-between items-end mb-12">
+                <h2 class="text-3xl font-bold max-w-md leading-tight text-brand-dark" data-i18n="blog_title">ПОЛЕЗНЫЕ СТАТЬИ<br>И СОВЕТЫ</h2>
+                <a href="#" class="text-sm font-semibold border-b border-brand-accent text-brand-accent pb-1 hidden md:block hover:opacity-80 transition" data-i18n="btn_all_articles">Все статьи</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-[32px] border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition duration-300 group">
+                    <div class="h-64 relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent opacity-80 group-hover:opacity-60 transition duration-300"></div>
+                        <div class="absolute top-6 left-6"><span class="bg-brand-accent text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-md" data-i18n="blog_tag_1">Смета 2026</span></div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold mb-4 text-brand-dark group-hover:text-brand-accent transition leading-snug" data-i18n="blog_1_title">Сколько стоит ремонт квартиры в Валенсии в 2026 году?</h3>
+                        <p class="text-gray-500 text-sm mb-8 flex-grow leading-relaxed" data-i18n="blog_1_desc">Разбор реальной сметы: от демонтажа до финишной отделки. Рассказываем про актуальные цены на работы, черновые материалы и влияние инфляции.</p>
+                        <button type="button" onclick="openBlogModal('article1')" class="inline-flex items-center gap-2 text-sm font-bold text-brand-dark group-hover:text-brand-accent transition focus:outline-none text-left"><span data-i18n="btn_read_more">Читать полностью</span> <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[32px] border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition duration-300 group">
+                    <div class="h-64 relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent opacity-80 group-hover:opacity-60 transition duration-300"></div>
+                        <div class="absolute top-6 left-6"><span class="bg-brand-dark text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-md border border-white/20" data-i18n="blog_tag_2">Недвижимость</span></div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold mb-4 text-brand-dark group-hover:text-brand-accent transition leading-snug" data-i18n="blog_2_title">Инвестиции в Валенсию: выбираем квартиру под ремонт (Flipping)</h3>
+                        <p class="text-gray-500 text-sm mb-8 flex-grow leading-relaxed" data-i18n="blog_2_desc">Районы, которые принесут максимальный ROI. На что смотреть при покупке старого фонда, чтобы не разориться на скрытых дефектах и замене перекрытий.</p>
+                        <button type="button" onclick="openBlogModal('article2')" class="inline-flex items-center gap-2 text-sm font-bold text-brand-dark group-hover:text-brand-accent transition focus:outline-none text-left"><span data-i18n="btn_read_more">Читать полностью</span> <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 text-center md:hidden">
+                <a href="#" class="inline-block bg-brand-light text-brand-dark px-8 py-3 rounded-full text-sm font-bold hover:bg-gray-200 transition" data-i18n="btn_all_articles">Все статьи</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white rounded-t-[40px] pt-16 pb-8 border-t-4 border-brand-accent">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="text-2xl font-bold tracking-wider mb-6">NIVELLUX</div>
+                    <p class="text-gray-400 text-sm mb-6" data-i18n="footer_desc">Ремонтно-строительная компания в Валенсии.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4" data-i18n="footer_menu">Меню</h4>
+                    <ul class="flex flex-col gap-3 text-sm text-gray-400">
+                        <li><a href="#services" class="hover:text-brand-accent transition" data-i18n="nav_services">Услуги</a></li>
+                        <li><a href="#portfolio" class="hover:text-brand-accent transition" data-i18n="nav_portfolio">Объекты</a></li>
+                        <li><a href="#reviews" class="hover:text-brand-accent transition" data-i18n="nav_reviews">Отзывы</a></li>
+                        <li><a href="#faq" class="hover:text-brand-accent transition" data-i18n="nav_faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4" data-i18n="footer_contacts">Контакты</h4>
+                    <ul class="flex flex-col gap-3 text-sm text-gray-400">
+                        <li><a href="mailto:nivellux.slu@gmail.com" class="hover:text-white transition">nivellux.slu@gmail.com</a></li>
+                        <li><a href="tel:+34644791777" class="hover:text-white transition">+34 644 791 777</a></li>
+                        <li>Valencia, Comunidad Valenciana</li>
+                    </ul>
+                </div>
+                <div class="flex flex-col items-start md:items-end text-left md:text-right">
+                    <button onclick="openConsultationModal()" class="bg-brand-accent text-white px-8 py-3 rounded-full text-sm font-semibold hover:opacity-90 transition mb-6" data-i18n="btn_call_engineer">Вызвать замерщика</button>
+                    <div class="flex gap-3">
+                        <a href="https://instagram.com/nivellux.slu" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-accent hover:text-white cursor-pointer transition text-gray-300"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://wa.me/34644791777" target="_blank" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-brand-accent hover:text-white cursor-pointer transition text-gray-300"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">&copy; 2026 NIVELLUX Valencia. <span data-i18n="footer_rights">Все права защищены.</span></div>
+        </div>
+    </footer>
+
+    <!-- ================= МОДАЛЬНЫЕ ОКНА ================= -->
+    <div id="consultation-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeConsultationModal()"></div>
+        <div class="bg-white rounded-[32px] p-6 md:p-10 w-full max-w-md relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4">
+            <button onclick="closeConsultationModal()" class="absolute top-6 right-6 text-gray-400 hover:text-brand-accent transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div id="consultation-form-container">
+                <h3 class="text-3xl font-bold mb-2 text-brand-dark" data-i18n="modal_consult_title">Запись на консультацию</h3>
+                <p class="text-gray-500 mb-8 text-sm" data-i18n="modal_consult_desc">Оставьте свои контакты, и наш специалист свяжется с вами.</p>
+                <form id="consultation-form" class="space-y-6">
+                    <div class="space-y-4">
+                        <input type="text" required placeholder="Ваше имя" data-i18n-placeholder="modal_name_ph" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition">
+                        <input type="tel" required placeholder="+34 XXX XXX XXX" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition">
+                    </div>
+                    <button type="submit" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition flex items-center justify-center gap-2 mt-4" data-i18n="btn_send">Отправить</button>
+                </form>
+            </div>
+            <div id="consultation-success" class="hidden flex-col items-center justify-center py-10 text-center">
+                <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6"><i data-lucide="check" class="w-10 h-10"></i></div>
+                <h3 class="text-2xl font-bold text-brand-dark mb-2" data-i18n="modal_success_title">Спасибо за заявку!</h3>
+                <p class="text-gray-500 text-sm max-w-sm" data-i18n="modal_success_desc_short">Наш менеджер свяжется с вами.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="estimate-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeEstimateModal()"></div>
+        <div class="bg-white rounded-[32px] p-6 md:p-10 w-full max-w-2xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4">
+            <button onclick="closeEstimateModal()" class="absolute top-6 right-6 text-gray-400 hover:text-brand-accent transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div id="estimate-form-container">
+                <h3 class="text-3xl font-bold mb-2 text-brand-dark" data-i18n="modal_title">Рассчитать смету</h3>
+                <p class="text-gray-500 mb-8 text-sm" data-i18n="modal_desc">Укажите параметры вашего объекта.</p>
+                <form id="estimate-form" class="space-y-6">
+                    <div>
+                        <h4 class="font-bold text-brand-dark mb-3 text-sm" data-i18n="modal_type">Тип объекта</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <label class="cursor-pointer border border-gray-200 rounded-xl p-3 flex items-center gap-3 hover:border-brand-accent transition"><input type="radio" name="object_type" value="apartment" class="accent-brand-accent w-4 h-4" checked><span class="text-sm font-medium" data-i18n="modal_type_1">Квартира</span></label>
+                            <label class="cursor-pointer border border-gray-200 rounded-xl p-3 flex items-center gap-3 hover:border-brand-accent transition"><input type="radio" name="object_type" value="house" class="accent-brand-accent w-4 h-4"><span class="text-sm font-medium" data-i18n="modal_type_2">Дом / Вилла</span></label>
+                            <label class="cursor-pointer border border-gray-200 rounded-xl p-3 flex items-center gap-3 hover:border-brand-accent transition"><input type="radio" name="object_type" value="commercial" class="accent-brand-accent w-4 h-4"><span class="text-sm font-medium" data-i18n="modal_type_3">Коммерция</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-brand-dark mb-3 text-sm" data-i18n="modal_area">Площадь (м²)</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <label class="cursor-pointer border border-gray-200 rounded-xl px-4 py-2 hover:border-brand-accent transition flex items-center gap-2"><input type="radio" name="object_area" value="50" class="accent-brand-accent w-4 h-4" checked><span class="text-sm font-medium">До 50</span></label>
+                            <label class="cursor-pointer border border-gray-200 rounded-xl px-4 py-2 hover:border-brand-accent transition flex items-center gap-2"><input type="radio" name="object_area" value="100" class="accent-brand-accent w-4 h-4"><span class="text-sm font-medium">50 - 100</span></label>
+                            <label class="cursor-pointer border border-gray-200 rounded-xl px-4 py-2 hover:border-brand-accent transition flex items-center gap-2"><input type="radio" name="object_area" value="150" class="accent-brand-accent w-4 h-4"><span class="text-sm font-medium">100 - 150</span></label>
+                            <label class="cursor-pointer border border-gray-200 rounded-xl px-4 py-2 hover:border-brand-accent transition flex items-center gap-2"><input type="radio" name="object_area" value="200" class="accent-brand-accent w-4 h-4"><span class="text-sm font-medium">150 - 200</span></label>
+                            <label class="cursor-pointer border border-gray-200 rounded-xl px-4 py-2 hover:border-brand-accent transition flex items-center gap-2"><input type="radio" name="object_area" value="200+" class="accent-brand-accent w-4 h-4"><span class="text-sm font-medium">200+</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-brand-dark mb-3 text-sm" data-i18n="modal_works">Работы</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="cursor-pointer flex items-center gap-3"><input type="checkbox" name="works" value="demolition" class="accent-brand-accent w-5 h-5 rounded"><span class="text-sm text-gray-700" data-i18n="modal_work_1">Демонтаж</span></label>
+                            <label class="cursor-pointer flex items-center gap-3"><input type="checkbox" name="works" value="electro" class="accent-brand-accent w-5 h-5 rounded"><span class="text-sm text-gray-700" data-i18n="modal_work_2">Электрика</span></label>
+                            <label class="cursor-pointer flex items-center gap-3"><input type="checkbox" name="works" value="plumbing" class="accent-brand-accent w-5 h-5 rounded"><span class="text-sm text-gray-700" data-i18n="modal_work_3">Сантехника</span></label>
+                            <label class="cursor-pointer flex items-center gap-3"><input type="checkbox" name="works" value="plastering" class="accent-brand-accent w-5 h-5 rounded"><span class="text-sm text-gray-700" data-i18n="modal_work_4">Отделка</span></label>
+                            <label class="cursor-pointer flex items-center gap-3 sm:col-span-2 mt-2 bg-brand-light p-3 rounded-xl border border-transparent hover:border-brand-accent transition"><input type="checkbox" name="works" value="turnkey" class="accent-brand-accent w-5 h-5 rounded" id="turnkey-checkbox"><span class="text-sm font-bold text-brand-dark" data-i18n="modal_work_5">Под ключ (все включено)</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-brand-dark mb-3 text-sm" data-i18n="modal_contacts">Контакты</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" required placeholder="Имя" data-i18n-placeholder="modal_name_ph" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition">
+                            <input type="tel" required placeholder="+34" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition flex items-center justify-center gap-2 mt-4" data-i18n="modal_btn">Запросить расчет</button>
+                </form>
+            </div>
+            <div id="estimate-success" class="hidden flex-col items-center justify-center py-10 text-center">
+                <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6"><i data-lucide="check" class="w-10 h-10"></i></div>
+                <h3 class="text-2xl font-bold text-brand-dark mb-2" data-i18n="modal_success_title">Спасибо!</h3>
+                <p class="text-gray-500 text-sm max-w-sm" data-i18n="modal_success_desc">Менеджер свяжется с вами.</p>
+                <button onclick="closeEstimateModal()" class="mt-8 bg-brand-light text-brand-dark px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition" data-i18n="btn_close">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="design-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeDesignModal()"></div>
+        <div class="bg-white rounded-[32px] p-6 md:p-10 w-full max-w-3xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4">
+            <button onclick="closeDesignModal()" class="absolute top-6 right-6 z-20 text-brand-dark hover:text-brand-accent transition bg-white/80 rounded-full p-1.5 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="w-full h-48 md:h-64 rounded-[24px] bg-cover bg-center mb-8 shadow-inner" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+            <h3 class="text-3xl font-bold mb-4 text-brand-dark leading-tight" data-i18n="modal_design_title">Дизайн интерьера</h3>
+            <p class="text-gray-600 mb-8 leading-relaxed" data-i18n="modal_design_desc">Мы создаем не просто красивые картинки, а продуманные до миллиметра технические проекты.</p>
+            <h4 class="text-xl font-bold mb-4 text-brand-dark" data-i18n="modal_design_process_title">Как мы работаем:</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_design_step_1">1. Планировочное решение</h5><p class="text-sm text-gray-600" data-i18n="modal_design_step_1_desc">Прорабатываем эргономику.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_design_step_2">2. 3D-Визуализация</h5><p class="text-sm text-gray-600" data-i18n="modal_design_step_2_desc">Создаем рендеры.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_design_step_3">3. Рабочая документация</h5><p class="text-sm text-gray-600" data-i18n="modal_design_step_3_desc">Готовим детальные чертежи.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_design_step_4">4. Комплектация</h5><p class="text-sm text-gray-600" data-i18n="modal_design_step_4_desc">Подбор материалов.</p></div>
+            </div>
+            <button onclick="closeDesignModal(); openConsultationModal();" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition flex items-center justify-center gap-2 shadow-md"><span data-i18n="modal_design_cta">Заказать дизайн-проект</span><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+        </div>
+    </div>
+
+    <div id="engineering-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeEngineeringModal()"></div>
+        <div class="bg-white rounded-[32px] p-6 md:p-10 w-full max-w-3xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4">
+            <button onclick="closeEngineeringModal()" class="absolute top-6 right-6 z-20 text-brand-dark hover:text-brand-accent transition bg-white/80 rounded-full p-1.5 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="w-full h-48 md:h-64 rounded-[24px] bg-cover bg-center mb-8 shadow-inner" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+            <h3 class="text-3xl font-bold mb-4 text-brand-dark leading-tight" data-i18n="modal_eng_title">Инженерные сети</h3>
+            <p class="text-gray-600 mb-8 leading-relaxed" data-i18n="modal_eng_desc">Надежные инженерные системы — это кровеносная система вашего дома.</p>
+            <h4 class="text-xl font-bold mb-4 text-brand-dark" data-i18n="modal_eng_process_title">Что входит в наши услуги:</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_eng_step_1">1. Электрика</h5><p class="text-sm text-gray-600" data-i18n="modal_eng_step_1_desc">Монтаж щитков и трасс.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_eng_step_2">2. Водоснабжение</h5><p class="text-sm text-gray-600" data-i18n="modal_eng_step_2_desc">Замена труб.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_eng_step_3">3. Климат</h5><p class="text-sm text-gray-600" data-i18n="modal_eng_step_3_desc">Теплые полы и кондиционеры.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_eng_step_4">4. Слаботочка</h5><p class="text-sm text-gray-600" data-i18n="modal_eng_step_4_desc">Интернет и безопасность.</p></div>
+            </div>
+            <button onclick="closeEngineeringModal(); openConsultationModal();" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition flex items-center justify-center gap-2 shadow-md"><span data-i18n="modal_eng_cta">Рассчитать</span><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+        </div>
+    </div>
+
+    <div id="smarthome-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeSmartHomeModal()"></div>
+        <div class="bg-white rounded-[32px] p-6 md:p-10 w-full max-w-3xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4">
+            <button onclick="closeSmartHomeModal()" class="absolute top-6 right-6 z-20 text-brand-dark hover:text-brand-accent transition bg-white/80 rounded-full p-1.5 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="w-full h-48 md:h-64 rounded-[24px] bg-cover bg-center mb-8 shadow-inner" style="background-image: url('https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
+            <h3 class="text-3xl font-bold mb-4 text-brand-dark leading-tight" data-i18n="modal_sh_title">Умный дом (Domótica)</h3>
+            <p class="text-gray-600 mb-8 leading-relaxed" data-i18n="modal_sh_desc">Сделайте вашу жизнь комфортнее и безопаснее с помощью передовых систем.</p>
+            <h4 class="text-xl font-bold mb-4 text-brand-dark" data-i18n="modal_sh_process_title">Возможности:</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_sh_step_1">1. Свет</h5><p class="text-sm text-gray-600" data-i18n="modal_sh_step_1_desc">Управление со смартфона.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_sh_step_2">2. Климат</h5><p class="text-sm text-gray-600" data-i18n="modal_sh_step_2_desc">Автоматизация температуры.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_sh_step_3">3. Безопасность</h5><p class="text-sm text-gray-600" data-i18n="modal_sh_step_3_desc">Камеры и замки.</p></div>
+                <div class="bg-brand-light p-5 rounded-2xl border border-transparent hover:border-brand-accent/30 transition"><h5 class="font-bold text-brand-dark mb-2" data-i18n="modal_sh_step_4">4. Шторы</h5><p class="text-sm text-gray-600" data-i18n="modal_sh_step_4_desc">Автоматическое открытие.</p></div>
+            </div>
+            <button onclick="closeSmartHomeModal(); openConsultationModal();" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition flex items-center justify-center gap-2 shadow-md"><span data-i18n="modal_sh_cta">Подробнее</span><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+        </div>
+    </div>
+
+    <div id="complex-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeComplexModal()"></div>
+        <div class="bg-white rounded-[32px] w-full max-w-5xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4 flex flex-col">
+            <button onclick="closeComplexModal()" class="absolute top-6 right-6 z-20 text-brand-dark hover:text-brand-accent transition bg-white/80 rounded-full p-1.5 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="p-6 md:p-10 md:pb-0">
+                <h3 class="text-3xl font-bold mb-4 text-brand-dark leading-tight pr-8" data-i18n="modal_comp_title">Комплексный ремонт под ключ</h3>
+                <p class="text-gray-600 leading-relaxed max-w-3xl" data-i18n="modal_comp_desc">Берем на себя всю ответственность за ваш ремонт.</p>
+            </div>
+            <div class="flex flex-col md:flex-row p-6 md:p-10 pt-6 gap-10">
+                <div class="w-full md:w-1/2">
+                    <h4 class="text-xl font-bold mb-6 text-brand-dark" data-i18n="modal_comp_process_title">Этапы работ:</h4>
+                    <div class="space-y-0">
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0">1</div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comp_step_1">Демонтаж</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comp_step_1_desc">Снос конструкций.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0">2</div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comp_step_2">Сети</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comp_step_2_desc">Монтаж труб и кабелей.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0">3</div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comp_step_3">Черновая</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comp_step_3_desc">Стяжка и штукатурка.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0">4</div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comp_step_4">Чистовая</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comp_step_4_desc">Укладка плитки.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0">5</div><div class="w-0.5 h-4 bg-transparent my-1"></div></div><div class="pb-2"><h5 class="font-bold text-brand-dark" data-i18n="modal_comp_step_5">Сдача</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comp_step_5_desc">Клининг.</p></div></div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="bg-brand-light p-8 rounded-[24px] h-full flex flex-col justify-center border border-gray-200 shadow-sm">
+                        <div id="complex-form-container">
+                            <h4 class="text-2xl font-bold text-brand-dark mb-2" data-i18n="modal_comp_form_title">Смета</h4>
+                            <p class="text-sm text-gray-600 mb-6" data-i18n="modal_comp_form_desc">Оставьте заявку.</p>
+                            <form id="complex-form" class="space-y-4">
+                                <input type="text" required placeholder="Имя" data-i18n-placeholder="modal_name_ph" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition bg-white">
+                                <input type="tel" required placeholder="+34" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition bg-white">
+                                <button type="submit" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition shadow-md mt-2" data-i18n="btn_send">Отправить</button>
+                            </form>
+                        </div>
+                        <div id="complex-success" class="hidden flex-col items-center justify-center py-6 text-center">
+                            <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-4"><i data-lucide="check" class="w-8 h-8"></i></div>
+                            <h4 class="text-xl font-bold text-brand-dark mb-2" data-i18n="modal_success_title">Спасибо!</h4>
+                            <p class="text-gray-500 text-sm" data-i18n="modal_success_desc_short">Свяжемся с вами.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="commercial-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeCommercialModal()"></div>
+        <div class="bg-white rounded-[32px] w-full max-w-5xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4 flex flex-col">
+            <button onclick="closeCommercialModal()" class="absolute top-6 right-6 z-20 text-brand-dark hover:text-brand-accent transition bg-white/80 rounded-full p-1.5 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="p-6 md:p-10 md:pb-0">
+                <h3 class="text-3xl font-bold mb-4 text-brand-dark leading-tight pr-8" data-i18n="modal_comm_title">Ремонт коммерции</h3>
+                <p class="text-gray-600 leading-relaxed max-w-3xl" data-i18n="modal_comm_desc">Знаем все юридические нюансы.</p>
+            </div>
+            <div class="flex flex-col md:flex-row p-6 md:p-10 pt-6 gap-10">
+                <div class="w-full md:w-1/2">
+                    <h4 class="text-xl font-bold mb-6 text-brand-dark" data-i18n="modal_comm_process_title">Внимание на:</h4>
+                    <div class="space-y-0">
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="file-check" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comm_step_1">Лицензии</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comm_step_1_desc">Ayuntamiento.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="zap" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comm_step_2">Мощность</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comm_step_2_desc">Boletín Eléctrico.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="wind" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comm_step_3">Вытяжка</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comm_step_3_desc">Salida de humos.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="volume-x" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_comm_step_4">Звук</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comm_step_4_desc">Estudio acústico.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="flame" class="w-4 h-4"></i></div><div class="w-0.5 h-4 bg-transparent my-1"></div></div><div class="pb-2"><h5 class="font-bold text-brand-dark" data-i18n="modal_comm_step_5">Пожарная</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_comm_step_5_desc">Огнестойкость.</p></div></div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="bg-brand-light p-8 rounded-[24px] h-full flex flex-col justify-center border border-gray-200 shadow-sm">
+                        <div id="commercial-form-container">
+                            <h4 class="text-2xl font-bold text-brand-dark mb-2" data-i18n="modal_comp_form_title">Получить смету</h4>
+                            <p class="text-sm text-gray-600 mb-6" data-i18n="modal_comp_form_desc">Оставьте заявку.</p>
+                            <form id="commercial-form" class="space-y-4">
+                                <input type="text" required placeholder="Имя" data-i18n-placeholder="modal_name_ph" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition bg-white">
+                                <input type="tel" required placeholder="+34" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition bg-white">
+                                <button type="submit" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition shadow-md mt-2" data-i18n="btn_send">Отправить</button>
+                            </form>
+                        </div>
+                        <div id="commercial-success" class="hidden flex-col items-center justify-center py-6 text-center">
+                            <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-4"><i data-lucide="check" class="w-8 h-8"></i></div>
+                            <h4 class="text-xl font-bold text-brand-dark mb-2" data-i18n="modal_success_title">Спасибо!</h4>
+                            <p class="text-gray-500 text-sm" data-i18n="modal_success_desc_short">Свяжемся с вами.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="licenses-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeLicensesModal()"></div>
+        <div class="bg-white rounded-[32px] w-full max-w-5xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4 flex flex-col">
+            <button onclick="closeLicensesModal()" class="absolute top-6 right-6 z-20 text-brand-dark hover:text-brand-accent transition bg-white/80 rounded-full p-1.5 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="p-6 md:p-10 md:pb-0">
+                <h3 class="text-3xl font-bold mb-4 text-brand-dark leading-tight pr-8" data-i18n="modal_lic_title">Лицензии и проекты</h3>
+                <p class="text-gray-600 leading-relaxed max-w-3xl" data-i18n="modal_lic_desc">Мы берем на себя всю бюрократию.</p>
+            </div>
+            <div class="flex flex-col md:flex-row p-6 md:p-10 pt-6 gap-10">
+                <div class="w-full md:w-1/2">
+                    <h4 class="text-xl font-bold mb-6 text-brand-dark" data-i18n="modal_lic_process_title">Чем мы помогаем:</h4>
+                    <div class="space-y-0">
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="file-text" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_lic_step_1">Obra Menor</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_lic_step_1_desc">Декларация.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="building" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_lic_step_2">Obra Mayor</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_lic_step_2_desc">Капремонт.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="arrow-right-left" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_lic_step_3">Cambio de Uso</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_lic_step_3_desc">Смена назначения.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="stamp" class="w-4 h-4"></i></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div><div class="pb-6"><h5 class="font-bold text-brand-dark" data-i18n="modal_lic_step_4">Legalización</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_lic_step_4_desc">Узаконивание.</p></div></div>
+                        <div class="flex gap-4"><div class="flex flex-col items-center"><div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm z-10 shrink-0"><i data-lucide="award" class="w-4 h-4"></i></div><div class="w-0.5 h-4 bg-transparent my-1"></div></div><div class="pb-2"><h5 class="font-bold text-brand-dark" data-i18n="modal_lic_step_5">Сертификаты</h5><p class="text-sm text-gray-500 mt-1" data-i18n="modal_lic_step_5_desc">Cédula.</p></div></div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="bg-brand-light p-8 rounded-[24px] h-full flex flex-col justify-center border border-gray-200 shadow-sm">
+                        <div id="licenses-form-container">
+                            <h4 class="text-2xl font-bold text-brand-dark mb-2" data-i18n="modal_lic_form_title">Консультация</h4>
+                            <p class="text-sm text-gray-600 mb-6" data-i18n="modal_lic_form_desc">Оставьте заявку.</p>
+                            <form id="licenses-form" class="space-y-4">
+                                <input type="text" required placeholder="Имя" data-i18n-placeholder="modal_name_ph" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition bg-white">
+                                <input type="tel" required placeholder="+34" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-accent transition bg-white">
+                                <button type="submit" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition shadow-md mt-2" data-i18n="btn_send">Отправить</button>
+                            </form>
+                        </div>
+                        <div id="licenses-success" class="hidden flex-col items-center justify-center py-6 text-center">
+                            <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-4"><i data-lucide="check" class="w-8 h-8"></i></div>
+                            <h4 class="text-xl font-bold text-brand-dark mb-2" data-i18n="modal_success_title">Спасибо!</h4>
+                            <p class="text-gray-500 text-sm" data-i18n="modal_success_desc_short">Менеджер свяжется с вами.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОРТФОЛИО -->
+    <div id="portfolio-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/90 backdrop-blur-sm" onclick="closePortfolioModal()"></div>
+        <div class="bg-white rounded-[32px] w-full max-w-6xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4 flex flex-col no-scrollbar">
+            <button onclick="closePortfolioModal()" class="absolute top-6 right-6 z-50 text-white hover:text-brand-accent transition bg-brand-dark/50 rounded-full p-2 backdrop-blur-md shadow-sm"><i data-lucide="x" class="w-6 h-6"></i></button>
+            
+            <div id="portfolio-dynamic-content" class="w-full"></div>
+            
+            <div class="p-8 md:p-12 bg-white pb-16">
+                <div class="bg-brand-dark rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="w-full md:w-1/2 relative z-10">
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight" data-i18n="portf_mod_cta_title">Хочу такой же результат!</h3>
+                        <p class="text-gray-300" data-i18n="portf_mod_cta_desc">Оставьте свои контакты, и мы свяжемся с вами для обсуждения вашего проекта. Первичная консультация и выезд на замер — бесплатно.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 relative z-10">
+                        <form id="portfolio-cta-form" onsubmit="submitPortfolioCTA(event)" class="flex flex-col gap-4">
+                            <input type="text" required placeholder="Имя" data-i18n-placeholder="modal_name_ph" class="w-full border-none rounded-xl px-5 py-4 text-sm outline-none focus:ring-2 focus:ring-brand-accent transition bg-white text-brand-dark">
+                            <input type="tel" required placeholder="+34" class="w-full border-none rounded-xl px-5 py-4 text-sm outline-none focus:ring-2 focus:ring-brand-accent transition bg-white text-brand-dark">
+                            <button type="submit" class="w-full bg-brand-accent text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition shadow-lg text-lg" data-i18n="portf_mod_btn_send">Связаться</button>
+                        </form>
+                        <div id="portfolio-cta-success" class="hidden flex-col items-center justify-center py-6 text-center text-white bg-white/10 rounded-xl border border-white/20 backdrop-blur-sm mt-4">
+                            <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mb-3"><i data-lucide="check" class="w-6 h-6"></i></div>
+                            <h4 class="text-lg font-bold mb-1" data-i18n="modal_success_title">Спасибо!</h4>
+                            <p class="text-gray-200 text-sm" data-i18n="modal_success_desc_short">Наш менеджер свяжется с вами.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА СТАТЬИ БЛОГА -->
+    <div id="blog-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/90 backdrop-blur-sm" onclick="closeBlogModal()"></div>
+        <div class="bg-white w-full max-w-4xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4 flex flex-col no-scrollbar rounded-[32px]">
+            <button type="button" onclick="closeBlogModal()" class="absolute top-6 right-6 z-50 text-white hover:text-brand-accent transition bg-brand-dark/50 rounded-full p-2 backdrop-blur-md shadow-sm" aria-label="Закрыть">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="blog-dynamic-content" class="w-full"></div>
+        </div>
+    </div>
+
+    <!-- ЛАЙТБОКС -->
+    <div id="lightbox-modal" class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-black/95" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white hover:text-brand-accent transition z-50"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <img id="lightbox-img" src="" alt="Gallery" class="max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl transition-transform transform scale-95" onclick="event.stopPropagation()">
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+</body>
+</html>
