@@ -388,16 +388,12 @@ if (typeof lucide !== 'undefined') {
         document.querySelector('footer button[data-i18n="btn_call_engineer"]')
             ?.addEventListener('click', () => window.openConsultationModal?.());
 
-        const serviceGrid = document.querySelector('#services .grid');
-        if (serviceGrid) {
-            const serviceCards = serviceGrid.children;
-            serviceCards[0]?.classList.add('cursor-pointer');
-            serviceCards[2]?.classList.add('cursor-pointer');
-            serviceCards[4]?.classList.add('cursor-pointer');
-            serviceCards[0]?.addEventListener('click', () => window.openComplexModal?.());
-            serviceCards[2]?.addEventListener('click', () => window.openCommercialModal?.());
-            serviceCards[4]?.addEventListener('click', () => window.openLicensesModal?.());
-        }
+        document.getElementById('service-open-complex')
+            ?.addEventListener('click', () => window.openComplexModal?.());
+        document.getElementById('service-open-commercial')
+            ?.addEventListener('click', () => window.openCommercialModal?.());
+        document.getElementById('service-open-licenses')
+            ?.addEventListener('click', () => window.openLicensesModal?.());
 
         const detailsButtons = document.querySelectorAll('#services button[data-i18n="btn_details"]');
         detailsButtons[0]?.addEventListener('click', () => window.openDesignModal?.());
@@ -519,7 +515,7 @@ if (typeof lucide !== 'undefined') {
                 <div class="w-full h-64 md:h-96 bg-cover bg-center relative rounded-t-[32px] shrink-0" style="background-image: url('${data.heroImg}');">
                     <div class="absolute inset-0 bg-brand-dark/40 rounded-t-[32px]"></div>
                 </div>
-                <div class="max-w-3xl mx-auto px-6 md:px-12 py-12 relative z-10 -mt-20 bg-white rounded-3xl shadow-xl mb-12">
+                <div class="px-6 md:px-12 py-10 md:py-12 bg-white">
                     <div class="flex flex-wrap gap-4 items-center mb-6">
                         <span class="bg-brand-accent text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide">${t(data.tagKey)}</span>
                         <span class="text-gray-400 text-sm font-medium flex items-center gap-1"><i data-lucide="calendar" class="w-4 h-4"></i> ${t(data.dateKey)}</span>
