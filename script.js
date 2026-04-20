@@ -370,6 +370,7 @@ if (typeof lucide !== 'undefined') {
         function closeSmartHomeModal() { toggleModal('smarthome-modal', false); }
 
         const LEAD_EMAIL = 'fahrengheit1@gmail.com';
+        const LEADS_API_URL = window.NIVELLUX_LEADS_API_URL || '';
 
         function collectLeadPayload(form, source) {
             const fields = Array.from(form.querySelectorAll('input, select, textarea'));
@@ -420,12 +421,77 @@ if (typeof lucide !== 'undefined') {
             window.location.href = `mailto:${LEAD_EMAIL}?subject=${subject}&body=${body}`;
         }
 
+        function collectLeadFields(form) {
+            const fields = Array.from(form.querySelectorAll('input, select, textarea'));
+            const values = {};
+
+            fields.forEach((field, idx) => {
+                if (field.disabled) return;
+                const type = (field.type || '').toLowerCase();
+                if (type === 'submit' || type === 'button' || type === 'hidden') return;
+
+                const key = field.name || field.id || field.getAttribute('placeholder') || `field_${idx + 1}`;
+                let value = '';
+
+                if (type === 'radio') {
+                    if (!field.checked) return;
+                    value = field.value || 'selected';
+                } else if (type === 'checkbox') {
+                    if (!field.checked) return;
+                    value = field.value || 'checked';
+                } else {
+                    value = (field.value || '').trim();
+                    if (!value) return;
+                }
+
+                if (values[key] === undefined) {
+                    values[key] = value;
+                } else if (Array.isArray(values[key])) {
+                    values[key].push(value);
+                } else {
+                    values[key] = [values[key], value];
+                }
+            });
+
+            return values;
+        }
+
+        async function sendLeadToBackend(form, source) {
+            if (!LEADS_API_URL) throw new Error('LEADS_API_URL is not configured');
+            const payload = {
+                source,
+                pageUrl: window.location.href,
+                language: document.documentElement.lang || 'ru',
+                submittedAt: new Date().toISOString(),
+                fields: collectLeadFields(form)
+            };
+
+            const res = await fetch(LEADS_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) {
+                throw new Error(`Lead API responded with ${res.status}`);
+            }
+        }
+
+        async function submitLead(form, source) {
+            try {
+                await sendLeadToBackend(form, source);
+            } catch (err) {
+                console.warn('[Lead] Backend submission failed, fallback to mailto', err);
+                sendLeadViaMailto(form, source);
+            }
+        }
+
         function setupForm(formId, successId, modalId) {
             const form = document.getElementById(formId);
             if(form) {
-                form.addEventListener('submit', (e) => {
+                form.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    sendLeadViaMailto(form, formId);
+                    await submitLead(form, formId);
                     document.getElementById(formId + '-container').classList.add('hidden');
                     const s = document.getElementById(successId);
                     s.classList.remove('hidden'); s.classList.add('flex');
@@ -611,10 +677,10 @@ if (typeof lucide !== 'undefined') {
         };
         
         window.closePortfolioModal = function() { toggleModal('portfolio-modal', false); };
-        window.submitPortfolioCTA = function(e) {
+        window.submitPortfolioCTA = async function(e) {
             e.preventDefault();
             const form = document.getElementById('portfolio-cta-form');
-            if (form) sendLeadViaMailto(form, 'portfolio-cta-form');
+            if (form) await submitLead(form, 'portfolio-cta-form');
             document.getElementById('portfolio-cta-form').classList.replace('flex', 'hidden');
             document.getElementById('portfolio-cta-success').classList.replace('hidden', 'flex');
             if (typeof lucide !== 'undefined') lucide.createIcons();
