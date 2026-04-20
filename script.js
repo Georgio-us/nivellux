@@ -203,6 +203,7 @@ if (typeof lucide !== 'undefined') {
 
         function setLanguage(lang) {
             document.getElementById('current-lang').innerText = lang.toUpperCase();
+            document.documentElement.setAttribute('lang', lang);
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key].replace(/\n/g, '<br>');
@@ -220,8 +221,12 @@ if (typeof lucide !== 'undefined') {
         }
 
         // Выполняется не дожидаясь полного загрузки, т.к. скрипт в самом низу body
-        const savedLang = localStorage.getItem('nivellux_lang') || 'ru';
-        setLanguage(savedLang);
+        const forcedLang = String(window.NIVELLUX_FORCE_LANG || document.documentElement.getAttribute('lang') || '').toLowerCase();
+        const savedLang = String(localStorage.getItem('nivellux_lang') || '').toLowerCase();
+        const initialLang = translations[forcedLang]
+            ? forcedLang
+            : (translations[savedLang] ? savedLang : 'ru');
+        setLanguage(initialLang);
 
         document.querySelectorAll('.faq-item').forEach(item => {
             item.querySelector('button').addEventListener('click', () => {
@@ -407,13 +412,6 @@ if (typeof lucide !== 'undefined') {
             card.querySelector('.rounded-full.cursor-pointer')?.addEventListener('click', (e) => {
                 e.stopPropagation();
                 window.openPortfolioModal?.(projectId);
-            });
-        });
-
-        document.querySelectorAll('#blog [data-i18n="btn_read_more"]').forEach((btn, idx) => {
-            btn.closest('a,button')?.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.openBlogModal?.(idx === 0 ? 'article1' : 'article2');
             });
         });
 
