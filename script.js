@@ -369,57 +369,7 @@ if (typeof lucide !== 'undefined') {
         function openSmartHomeModal() { toggleModal('smarthome-modal', true); }
         function closeSmartHomeModal() { toggleModal('smarthome-modal', false); }
 
-        const LEAD_EMAIL = 'fahrengheit1@gmail.com';
         const LEADS_API_URL = window.NIVELLUX_LEADS_API_URL || '';
-
-        function collectLeadPayload(form, source) {
-            const fields = Array.from(form.querySelectorAll('input, select, textarea'));
-            const values = new Map();
-
-            fields.forEach((field, idx) => {
-                if (field.disabled) return;
-                const type = (field.type || '').toLowerCase();
-                if (type === 'submit' || type === 'button' || type === 'hidden') return;
-
-                const key = field.name || field.id || field.getAttribute('placeholder') || `field_${idx + 1}`;
-                let value = '';
-
-                if (type === 'radio') {
-                    if (!field.checked) return;
-                    value = field.value || 'selected';
-                } else if (type === 'checkbox') {
-                    if (!field.checked) return;
-                    value = field.value || 'checked';
-                } else {
-                    value = (field.value || '').trim();
-                    if (!value) return;
-                }
-
-                if (!values.has(key)) values.set(key, []);
-                values.get(key).push(value);
-            });
-
-            const lines = [
-                `Source: ${source}`,
-                `Page: ${window.location.href}`,
-                `Language: ${document.documentElement.lang || 'ru'}`,
-                `Time: ${new Date().toISOString()}`,
-                '',
-                'Lead details:'
-            ];
-
-            values.forEach((arr, key) => {
-                lines.push(`- ${key}: ${arr.join(', ')}`);
-            });
-
-            return lines.join('\n');
-        }
-
-        function sendLeadViaMailto(form, source) {
-            const subject = encodeURIComponent(`Nivellux lead: ${source}`);
-            const body = encodeURIComponent(collectLeadPayload(form, source));
-            window.location.href = `mailto:${LEAD_EMAIL}?subject=${subject}&body=${body}`;
-        }
 
         function collectLeadFields(form) {
             const fields = Array.from(form.querySelectorAll('input, select, textarea'));
@@ -478,12 +428,7 @@ if (typeof lucide !== 'undefined') {
         }
 
         async function submitLead(form, source) {
-            try {
-                await sendLeadToBackend(form, source);
-            } catch (err) {
-                console.warn('[Lead] Backend submission failed, fallback to mailto', err);
-                sendLeadViaMailto(form, source);
-            }
+            await sendLeadToBackend(form, source);
         }
 
         function setupForm(formId, successId, modalId) {
@@ -491,10 +436,16 @@ if (typeof lucide !== 'undefined') {
             if(form) {
                 form.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    await submitLead(form, formId);
-                    document.getElementById(formId + '-container').classList.add('hidden');
-                    const s = document.getElementById(successId);
-                    s.classList.remove('hidden'); s.classList.add('flex');
+                    try {
+                        await submitLead(form, formId);
+                        document.getElementById(formId + '-container').classList.add('hidden');
+                        const s = document.getElementById(successId);
+                        s.classList.remove('hidden');
+                        s.classList.add('flex');
+                    } catch (err) {
+                        console.error('[Lead] Submission failed', err);
+                        window.alert('Не удалось отправить заявку. Попробуйте еще раз через минуту.');
+                    }
                 });
             }
             window['open' + modalId + 'Modal'] = function() {
