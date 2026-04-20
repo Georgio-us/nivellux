@@ -360,11 +360,63 @@ if (typeof lucide !== 'undefined') {
         function openSmartHomeModal() { toggleModal('smarthome-modal', true); }
         function closeSmartHomeModal() { toggleModal('smarthome-modal', false); }
 
+        const LEAD_EMAIL = 'fahrengheit1@gmail.com';
+
+        function collectLeadPayload(form, source) {
+            const fields = Array.from(form.querySelectorAll('input, select, textarea'));
+            const values = new Map();
+
+            fields.forEach((field, idx) => {
+                if (field.disabled) return;
+                const type = (field.type || '').toLowerCase();
+                if (type === 'submit' || type === 'button' || type === 'hidden') return;
+
+                const key = field.name || field.id || field.getAttribute('placeholder') || `field_${idx + 1}`;
+                let value = '';
+
+                if (type === 'radio') {
+                    if (!field.checked) return;
+                    value = field.value || 'selected';
+                } else if (type === 'checkbox') {
+                    if (!field.checked) return;
+                    value = field.value || 'checked';
+                } else {
+                    value = (field.value || '').trim();
+                    if (!value) return;
+                }
+
+                if (!values.has(key)) values.set(key, []);
+                values.get(key).push(value);
+            });
+
+            const lines = [
+                `Source: ${source}`,
+                `Page: ${window.location.href}`,
+                `Language: ${document.documentElement.lang || 'ru'}`,
+                `Time: ${new Date().toISOString()}`,
+                '',
+                'Lead details:'
+            ];
+
+            values.forEach((arr, key) => {
+                lines.push(`- ${key}: ${arr.join(', ')}`);
+            });
+
+            return lines.join('\n');
+        }
+
+        function sendLeadViaMailto(form, source) {
+            const subject = encodeURIComponent(`Nivellux lead: ${source}`);
+            const body = encodeURIComponent(collectLeadPayload(form, source));
+            window.location.href = `mailto:${LEAD_EMAIL}?subject=${subject}&body=${body}`;
+        }
+
         function setupForm(formId, successId, modalId) {
             const form = document.getElementById(formId);
             if(form) {
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
+                    sendLeadViaMailto(form, formId);
                     document.getElementById(formId + '-container').classList.add('hidden');
                     const s = document.getElementById(successId);
                     s.classList.remove('hidden'); s.classList.add('flex');
@@ -552,6 +604,8 @@ if (typeof lucide !== 'undefined') {
         window.closePortfolioModal = function() { toggleModal('portfolio-modal', false); };
         window.submitPortfolioCTA = function(e) {
             e.preventDefault();
+            const form = document.getElementById('portfolio-cta-form');
+            if (form) sendLeadViaMailto(form, 'portfolio-cta-form');
             document.getElementById('portfolio-cta-form').classList.replace('flex', 'hidden');
             document.getElementById('portfolio-cta-success').classList.replace('hidden', 'flex');
             if (typeof lucide !== 'undefined') lucide.createIcons();
