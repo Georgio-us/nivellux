@@ -228,6 +228,39 @@ if (typeof lucide !== 'undefined') {
             : (translations[savedLang] ? savedLang : 'ru');
         setLanguage(initialLang);
 
+        // Language dropdown: hover (desktop) + tap (mobile)
+        const langSwitcher = document.getElementById('lang-switcher');
+        const langToggleBtn = document.getElementById('lang-toggle-btn');
+        const langDropdown = document.getElementById('lang-dropdown');
+
+        function setLangDropdownOpen(open) {
+            if (!langToggleBtn || !langDropdown) return;
+            langToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            langDropdown.classList.toggle('opacity-0', !open);
+            langDropdown.classList.toggle('invisible', !open);
+            langDropdown.classList.toggle('opacity-100', open);
+            langDropdown.classList.toggle('visible', open);
+        }
+
+        if (langSwitcher && langToggleBtn && langDropdown) {
+            langToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOpen = langToggleBtn.getAttribute('aria-expanded') === 'true';
+                setLangDropdownOpen(!isOpen);
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!langSwitcher.contains(e.target)) setLangDropdownOpen(false);
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') setLangDropdownOpen(false);
+            });
+        }
+
+        let suppressPortfolioClickUntil = 0;
+
         document.querySelectorAll('.faq-item').forEach(item => {
             item.querySelector('button').addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
@@ -253,6 +286,9 @@ if (typeof lucide !== 'undefined') {
         if (track && pagination) {
             const slides = track.children;
             let currentSlide = 0;
+            let touchStartX = 0;
+            let touchCurrentX = 0;
+            let isTouchTracking = false;
 
             function updateSlider() {
                 const isDesktop = window.innerWidth >= 768;
@@ -278,6 +314,29 @@ if (typeof lucide !== 'undefined') {
 
             if(btnPrev) btnPrev.addEventListener('click', () => { currentSlide--; updateSlider(); });
             if(btnNext) btnNext.addEventListener('click', () => { currentSlide++; updateSlider(); });
+            track.style.touchAction = 'pan-y';
+            track.addEventListener('touchstart', (e) => {
+                if (e.touches.length !== 1) return;
+                touchStartX = e.touches[0].clientX;
+                touchCurrentX = touchStartX;
+                isTouchTracking = true;
+            }, { passive: true });
+            track.addEventListener('touchmove', (e) => {
+                if (!isTouchTracking || e.touches.length !== 1) return;
+                touchCurrentX = e.touches[0].clientX;
+            }, { passive: true });
+            track.addEventListener('touchend', () => {
+                if (!isTouchTracking) return;
+                const deltaX = touchCurrentX - touchStartX;
+                const swipeThreshold = 40;
+                if (Math.abs(deltaX) >= swipeThreshold) {
+                    if (deltaX < 0) currentSlide++;
+                    else currentSlide--;
+                    updateSlider();
+                    suppressPortfolioClickUntil = Date.now() + 350;
+                }
+                isTouchTracking = false;
+            });
             window.addEventListener('resize', updateSlider);
             // Даем время CSS примениться перед расчетом ширины
             setTimeout(updateSlider, 150);
@@ -408,7 +467,14 @@ if (typeof lucide !== 'undefined') {
         document.querySelectorAll('#portfolio-track > div').forEach((card, idx) => {
             const projectId = `proj${idx + 1}`;
             card.classList.add('cursor-pointer');
-            card.addEventListener('click', () => window.openPortfolioModal?.(projectId));
+            card.addEventListener('click', (e) => {
+                if (Date.now() < suppressPortfolioClickUntil) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                }
+                window.openPortfolioModal?.(projectId);
+            });
             card.querySelector('.rounded-full.cursor-pointer')?.addEventListener('click', (e) => {
                 e.stopPropagation();
                 window.openPortfolioModal?.(projectId);
