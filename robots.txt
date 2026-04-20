@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Add absolute sitemap URL after production domain is finalized.
-# Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://nivellux.com/sitemap.xml
