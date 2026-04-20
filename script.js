@@ -259,6 +259,15 @@ if (typeof lucide !== 'undefined') {
             });
         }
 
+        // Force navigation for language links on mobile browsers
+        document.querySelectorAll('#lang-dropdown a, .mobile-lang-link').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                if (href) window.location.assign(href);
+            });
+        });
+
         let suppressPortfolioClickUntil = 0;
 
         document.querySelectorAll('.faq-item').forEach(item => {
