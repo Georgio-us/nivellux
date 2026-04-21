@@ -687,3 +687,20 @@ if (typeof lucide !== 'undefined') {
         };
 
         window.closeBlogModal = function() { toggleModal('blog-modal', false); };
+
+        function handleHomepageCtaHash() {
+            const hash = (window.location.hash || '').toLowerCase();
+            if (hash === '#estimate') {
+                window.openEstimateModal?.();
+                return true;
+            }
+            if (hash === '#contact') {
+                window.openConsultationModal?.();
+                return true;
+            }
+            return false;
+        }
+
+        window.addEventListener('hashchange', handleHomepageCtaHash);
+        // Support deep links from blog article CTAs.
+        setTimeout(handleHomepageCtaHash, 0);
