@@ -619,9 +619,9 @@ if (typeof lucide !== 'undefined') {
             `).join('');
 
             const html = `
-                <div class="w-full min-h-[350px] md:min-h-[450px] relative rounded-t-[32px] shrink-0 overflow-hidden">
+                <div class="w-full min-h-[350px] md:min-h-[450px] relative shrink-0 overflow-hidden">
                     <img src="${data.heroImg}" alt="${escapeHtmlAttr(heroAlt)}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent rounded-t-[32px]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-10">
                         <div class="flex gap-3 mb-4">
                             <span class="bg-brand-accent text-white px-4 py-1.5 rounded-full text-sm font-bold tracking-wide shadow-md">${t(projId + '_tag2')}</span>
