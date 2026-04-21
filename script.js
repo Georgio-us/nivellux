@@ -32,7 +32,7 @@ if (typeof lucide !== 'undefined') {
                     "/assets/case_sheila/second.jpeg", 
                     "/assets/case_sheila/third.jpeg",
                     "/assets/case_sheila/fourth.jpg",
-                    "/assets/case_sheila/title.jpg"
+                    "/assets/case_sheila/fifth.jpeg"
                 ], 
                 tech: ['tech_sound_danosa', 'tech_porcelanosa', 'tech_3phase', 'tech_vent', 'tech_ac', 'tech_micro', 'tech_fire'] 
             },
