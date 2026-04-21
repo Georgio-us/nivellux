@@ -4,35 +4,35 @@ if (typeof lucide !== 'undefined') {
 
         const portfolioProjectsData = {
             proj1: { 
-                heroImg: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", 
+                heroImg: "/assets/case_house/Title.jpeg", 
                 gallery: [
-                    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1600566753086-00f18efc204b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600573472592-401b489a8710?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600210491892-03b5484ca9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    "/assets/case_house/first.jpeg", 
+                    "/assets/case_house/second.jpeg", 
+                    "/assets/case_house/third.jpeg",
+                    "/assets/case_house/fourth.jpeg",
+                    "/assets/case_house/fifth.jpeg"
                 ], 
                 tech: ['tech_plaster', 'tech_screed', 'tech_networks', 'tech_sound', 'tech_paint'] 
             },
             proj2: { 
-                heroImg: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", 
+                heroImg: "/assets/case_townhouse/Title.jpeg", 
                 gallery: [
-                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1600585154526-990dced4e56d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1600040901028-cb863254e456?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600566752229-250da7d96cc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1583847268964-b28ce8f52859?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    "/assets/case_townhouse/first.jpeg", 
+                    "/assets/case_townhouse/second.jpeg", 
+                    "/assets/case_townhouse/third.jpeg",
+                    "/assets/case_townhouse/fourth.jpeg",
+                    "/assets/case_townhouse/fifth.jpeg"
                 ], 
                 tech: ['tech_facade', 'tech_smarthome', 'tech_heating', 'tech_networks', 'tech_sound'] 
             },
             proj3: { 
-                heroImg: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", 
+                heroImg: "/assets/case_sheila/title.jpg", 
                 gallery: [
-                    "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    "/assets/case_sheila/first.jpeg", 
+                    "/assets/case_sheila/second.jpeg", 
+                    "/assets/case_sheila/third.jpeg",
+                    "/assets/case_sheila/fourth.jpg",
+                    "/assets/case_sheila/title.jpg"
                 ], 
                 tech: ['tech_sound_danosa', 'tech_porcelanosa', 'tech_3phase', 'tech_vent', 'tech_ac', 'tech_micro', 'tech_fire'] 
             },
