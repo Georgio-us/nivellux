@@ -72,14 +72,22 @@ if (typeof lucide !== 'undefined') {
                 tech: ['tech_hidden', 'tech_shadow', 'tech_networks', 'tech_plaster'] 
             },
             proj5: { 
-                heroImg: "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", 
+                heroImg: "/assets/case_misha/title.jpg", 
+                heroAlt: "Ремонт салона красоты Misha: полный цикл — титульное фото объекта",
                 gallery: [
-                    "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1521590832167-7bfc6204631d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", 
-                    "https://images.unsplash.com/photo-1516975080661-422fc9910d1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    "/assets/case_misha/first.jpg", 
+                    "/assets/case_misha/second.jpg", 
+                    "/assets/case_misha/third.jpg",
+                    "/assets/case_misha/fourth.jpg",
+                    "/assets/case_misha/fifth.jpg"
                 ], 
+                galleryAlts: [
+                    "Ремонт салона красоты Misha: полный цикл — фото галереи 1",
+                    "Ремонт салона красоты Misha: полный цикл — фото галереи 2",
+                    "Ремонт салона красоты Misha: полный цикл — фото галереи 3",
+                    "Ремонт салона красоты Misha: полный цикл — фото галереи 4",
+                    "Ремонт салона красоты Misha: полный цикл — фото галереи 5"
+                ],
                 tech: ['tech_plumbing', 'tech_light', 'tech_paint_wash', 'tech_mold'] 
             },
             proj6: { 
