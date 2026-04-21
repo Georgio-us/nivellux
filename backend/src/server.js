@@ -7,6 +7,8 @@ const { Pool } = pg;
 
 const PORT = Number(process.env.PORT || 3000);
 const DATABASE_URL = process.env.DATABASE_URL;
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const ALLOWED_ORIGINS = String(process.env.CORS_ORIGIN || '*')
   .split(',')
   .map((v) => v.trim())
@@ -14,6 +16,12 @@ const ALLOWED_ORIGINS = String(process.env.CORS_ORIGIN || '*')
 
 if (!DATABASE_URL) {
   throw new Error('DATABASE_URL is required');
+}
+if (!TELEGRAM_BOT_TOKEN) {
+  throw new Error('TELEGRAM_BOT_TOKEN is required');
+}
+if (!TELEGRAM_CHAT_ID) {
+  throw new Error('TELEGRAM_CHAT_ID is required');
 }
 
 const shouldUseSSL =
@@ -46,6 +54,48 @@ function validateLead(body) {
     return 'fields must be an object';
   }
   return null;
+}
+
+function formatFieldValue(value) {
+  if (Array.isArray(value)) return value.join(', ');
+  if (value === null || value === undefined) return '-';
+  return String(value);
+}
+
+function buildTelegramLeadMessage({ leadId, source, pageUrl, language, submittedAt, createdAt, fields }) {
+  const lines = [
+    `New lead #${leadId}`,
+    `Source: ${source}`,
+    `Language: ${language || '-'}`,
+    `Page: ${pageUrl || '-'}`,
+    `Submitted: ${submittedAt.toISOString()}`,
+    `Saved: ${createdAt.toISOString()}`,
+    '',
+    'Fields:'
+  ];
+
+  for (const [key, value] of Object.entries(fields)) {
+    lines.push(`- ${key}: ${formatFieldValue(value)}`);
+  }
+
+  const text = lines.join('\n');
+  return text.length > 3800 ? `${text.slice(0, 3800)}\n…` : text;
+}
+
+async function sendLeadToTelegram(messageText) {
+  const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: messageText
+    })
+  });
+
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.ok) {
+    throw new Error(`Telegram send failed (${response.status}): ${payload.description || 'unknown error'}`);
+  }
 }
 
 const app = express();
@@ -93,6 +143,17 @@ app.post('/api/leads', async (req, res) => {
     );
 
     const lead = insert.rows[0];
+    const telegramMessage = buildTelegramLeadMessage({
+      leadId: lead.id,
+      source,
+      pageUrl,
+      language,
+      submittedAt,
+      createdAt: new Date(lead.created_at),
+      fields
+    });
+    await sendLeadToTelegram(telegramMessage);
+
     return res.json({ ok: true, id: lead.id });
   } catch (err) {
     console.error('[Lead API] Failed to process lead', err);

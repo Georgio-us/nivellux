@@ -3,6 +3,7 @@
 ## Что делает
 - Принимает заявки `POST /api/leads`
 - Сохраняет в Postgres (`leads`)
+- Отправляет заявку в Telegram-бота (`sendMessage`)
 
 ## Локальный запуск
 ```bash
@@ -22,7 +23,16 @@ npm run dev
 3. Добавь PostgreSQL plugin/service и скопируй `DATABASE_URL` в переменные.
 4. Добавь env:
    - `CORS_ORIGIN=https://nivellux.com,https://www.nivellux.com`
+   - `TELEGRAM_BOT_TOKEN=<token от BotFather>`
+   - `TELEGRAM_CHAT_ID=<chat id получателя>`
 5. Railway сам запустит `npm start`.
+
+## Telegram настройка
+1. Создай бота в `@BotFather` (`/newbot`) и скопируй токен в `TELEGRAM_BOT_TOKEN`.
+2. Определи `TELEGRAM_CHAT_ID`:
+   - Личка: напиши боту любое сообщение, затем открой  
+     `https://api.telegram.org/bot<TOKEN>/getUpdates` и возьми `message.chat.id`.
+   - Группа: добавь бота в группу, отправь сообщение в группу, затем посмотри `message.chat.id` (обычно отрицательный, например `-100...`).
 
 ## Подключение фронта
 В любой HTML перед `script.js` добавь:
