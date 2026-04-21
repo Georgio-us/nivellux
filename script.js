@@ -5,6 +5,7 @@ if (typeof lucide !== 'undefined') {
         const portfolioProjectsData = {
             proj1: { 
                 heroImg: "/assets/case_house/Title.jpeg", 
+                heroAlt: "Капитальный ремонт квартиры в районе Ruzafa — титульное фото объекта",
                 gallery: [
                     "/assets/case_house/first.jpeg", 
                     "/assets/case_house/second.jpeg", 
@@ -12,10 +13,18 @@ if (typeof lucide !== 'undefined') {
                     "/assets/case_house/fourth.jpeg",
                     "/assets/case_house/fifth.jpeg"
                 ], 
+                galleryAlts: [
+                    "Капитальный ремонт квартиры в районе Ruzafa — фото галереи 1",
+                    "Капитальный ремонт квартиры в районе Ruzafa — фото галереи 2",
+                    "Капитальный ремонт квартиры в районе Ruzafa — фото галереи 3",
+                    "Капитальный ремонт квартиры в районе Ruzafa — фото галереи 4",
+                    "Капитальный ремонт квартиры в районе Ruzafa — фото галереи 5"
+                ],
                 tech: ['tech_plaster', 'tech_screed', 'tech_networks', 'tech_sound', 'tech_paint'] 
             },
             proj2: { 
                 heroImg: "/assets/case_townhouse/Title.jpeg", 
+                heroAlt: "Реконструкция таунхауса в El Cabanyal — титульное фото объекта",
                 gallery: [
                     "/assets/case_townhouse/first.jpeg", 
                     "/assets/case_townhouse/second.jpeg", 
@@ -23,10 +32,18 @@ if (typeof lucide !== 'undefined') {
                     "/assets/case_townhouse/fourth.jpeg",
                     "/assets/case_townhouse/fifth.jpeg"
                 ], 
+                galleryAlts: [
+                    "Реконструкция таунхауса в El Cabanyal — фото галереи 1",
+                    "Реконструкция таунхауса в El Cabanyal — фото галереи 2",
+                    "Реконструкция таунхауса в El Cabanyal — фото галереи 3",
+                    "Реконструкция таунхауса в El Cabanyal — фото галереи 4",
+                    "Реконструкция таунхауса в El Cabanyal — фото галереи 5"
+                ],
                 tech: ['tech_facade', 'tech_smarthome', 'tech_heating', 'tech_networks', 'tech_sound'] 
             },
             proj3: { 
                 heroImg: "/assets/case_sheila/title.jpg", 
+                heroAlt: "Ремонт ресторана Pasqual&Sheila под ключ — титульное фото объекта",
                 gallery: [
                     "/assets/case_sheila/first.jpeg", 
                     "/assets/case_sheila/second.jpeg", 
@@ -34,6 +51,13 @@ if (typeof lucide !== 'undefined') {
                     "/assets/case_sheila/fourth.jpg",
                     "/assets/case_sheila/fifth.jpeg"
                 ], 
+                galleryAlts: [
+                    "Ремонт ресторана Pasqual&Sheila под ключ — фото галереи 1",
+                    "Ремонт ресторана Pasqual&Sheila под ключ — фото галереи 2",
+                    "Ремонт ресторана Pasqual&Sheila под ключ — фото галереи 3",
+                    "Ремонт ресторана Pasqual&Sheila под ключ — фото галереи 4",
+                    "Ремонт ресторана Pasqual&Sheila под ключ — фото галереи 5"
+                ],
                 tech: ['tech_sound_danosa', 'tech_porcelanosa', 'tech_3phase', 'tech_vent', 'tech_ac', 'tech_micro', 'tech_fire'] 
             },
             proj4: { 
@@ -559,12 +583,36 @@ if (typeof lucide !== 'undefined') {
             });
         });
 
+        const escapeHtmlAttr = (value) =>
+            String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+
         window.openPortfolioModal = function(projId) {
             const data = portfolioProjectsData[projId];
             if (!data) return;
+            const heroAlt = data.heroAlt || t(projId + '_title');
+            const fallbackGalleryAlts = data.gallery.map((_, idx) => `${t(projId + '_title')} — фото ${idx + 1}`);
+            const galleryAlts = data.galleryAlts || fallbackGalleryAlts;
+            const galleryCellClasses = [
+                "col-span-2 md:col-span-2 row-span-2 min-h-[200px] md:min-h-[400px]",
+                "col-span-1 min-h-[100px] md:min-h-[190px]",
+                "col-span-1 min-h-[100px] md:min-h-[190px]",
+                "col-span-1 min-h-[100px] md:min-h-[190px]",
+                "col-span-1 min-h-[100px] md:min-h-[190px]"
+            ];
+            const galleryTiles = data.gallery.map((src, idx) => `
+                <button type="button" onclick="openLightbox('${src}')" class="${galleryCellClasses[idx]} rounded-2xl cursor-pointer hover:opacity-90 transition shadow-sm overflow-hidden">
+                    <img src="${src}" alt="${escapeHtmlAttr(galleryAlts[idx])}" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                </button>
+            `).join('');
 
             const html = `
-                <div class="w-full min-h-[350px] md:min-h-[450px] bg-cover bg-center relative rounded-t-[32px] shrink-0" style="background-image: url('${data.heroImg}');">
+                <div class="w-full min-h-[350px] md:min-h-[450px] relative rounded-t-[32px] shrink-0 overflow-hidden">
+                    <img src="${data.heroImg}" alt="${escapeHtmlAttr(heroAlt)}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent rounded-t-[32px]"></div>
                     <div class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-10">
                         <div class="flex gap-3 mb-4">
@@ -609,11 +657,7 @@ if (typeof lucide !== 'undefined') {
 
                     <h3 class="text-2xl font-bold text-brand-dark mb-6">${t('portf_mod_gallery_title')}</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-                        <div onclick="openLightbox('${data.gallery[0]}')" class="col-span-2 md:col-span-2 row-span-2 min-h-[200px] md:min-h-[400px] bg-cover bg-center rounded-2xl cursor-pointer hover:opacity-90 transition shadow-sm" style="background-image: url('${data.gallery[0]}');"></div>
-                        <div onclick="openLightbox('${data.gallery[1]}')" class="col-span-1 min-h-[100px] md:min-h-[190px] bg-cover bg-center rounded-2xl cursor-pointer hover:opacity-90 transition shadow-sm" style="background-image: url('${data.gallery[1]}');"></div>
-                        <div onclick="openLightbox('${data.gallery[2]}')" class="col-span-1 min-h-[100px] md:min-h-[190px] bg-cover bg-center rounded-2xl cursor-pointer hover:opacity-90 transition shadow-sm" style="background-image: url('${data.gallery[2]}');"></div>
-                        <div onclick="openLightbox('${data.gallery[3]}')" class="col-span-1 min-h-[100px] md:min-h-[190px] bg-cover bg-center rounded-2xl cursor-pointer hover:opacity-90 transition shadow-sm" style="background-image: url('${data.gallery[3]}');"></div>
-                        <div onclick="openLightbox('${data.gallery[4]}')" class="col-span-1 min-h-[100px] md:min-h-[190px] bg-cover bg-center rounded-2xl cursor-pointer hover:opacity-90 transition shadow-sm" style="background-image: url('${data.gallery[4]}');"></div>
+                        ${galleryTiles}
                     </div>
                 </div>
             `;
@@ -640,6 +684,7 @@ if (typeof lucide !== 'undefined') {
         window.openLightbox = function(src) {
             const img = document.getElementById('lightbox-img');
             img.src = src;
+            img.alt = 'Фото объекта NIVELLUX';
             toggleModal('lightbox-modal', true);
             setTimeout(() => img.classList.replace('scale-95', 'scale-100'), 10);
         };
