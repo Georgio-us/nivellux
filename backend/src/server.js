@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import pg from 'pg';
+import { createTelegramNotifier } from './telegramNotifier.js';
 
 const { Pool } = pg;
 
@@ -23,6 +24,11 @@ if (!TELEGRAM_BOT_TOKEN) {
 if (!TELEGRAM_CHAT_ID) {
   throw new Error('TELEGRAM_CHAT_ID is required');
 }
+
+const telegramNotifier = createTelegramNotifier({
+  botToken: TELEGRAM_BOT_TOKEN,
+  chatId: TELEGRAM_CHAT_ID
+});
 
 const shouldUseSSL =
   process.env.PG_SSL === 'true' ||
@@ -54,48 +60,6 @@ function validateLead(body) {
     return 'fields must be an object';
   }
   return null;
-}
-
-function formatFieldValue(value) {
-  if (Array.isArray(value)) return value.join(', ');
-  if (value === null || value === undefined) return '-';
-  return String(value);
-}
-
-function buildTelegramLeadMessage({ leadId, source, pageUrl, language, submittedAt, createdAt, fields }) {
-  const lines = [
-    `New lead #${leadId}`,
-    `Source: ${source}`,
-    `Language: ${language || '-'}`,
-    `Page: ${pageUrl || '-'}`,
-    `Submitted: ${submittedAt.toISOString()}`,
-    `Saved: ${createdAt.toISOString()}`,
-    '',
-    'Fields:'
-  ];
-
-  for (const [key, value] of Object.entries(fields)) {
-    lines.push(`- ${key}: ${formatFieldValue(value)}`);
-  }
-
-  const text = lines.join('\n');
-  return text.length > 3800 ? `${text.slice(0, 3800)}\n…` : text;
-}
-
-async function sendLeadToTelegram(messageText) {
-  const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CHAT_ID,
-      text: messageText
-    })
-  });
-
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok || !payload.ok) {
-    throw new Error(`Telegram send failed (${response.status}): ${payload.description || 'unknown error'}`);
-  }
 }
 
 const app = express();
@@ -143,7 +107,7 @@ app.post('/api/leads', async (req, res) => {
     );
 
     const lead = insert.rows[0];
-    const telegramMessage = buildTelegramLeadMessage({
+    await telegramNotifier.sendLead({
       leadId: lead.id,
       source,
       pageUrl,
@@ -152,7 +116,6 @@ app.post('/api/leads', async (req, res) => {
       createdAt: new Date(lead.created_at),
       fields
     });
-    await sendLeadToTelegram(telegramMessage);
 
     return res.json({ ok: true, id: lead.id });
   } catch (err) {
