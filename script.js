@@ -496,6 +496,8 @@ if (typeof lucide !== 'undefined') {
         setupForm('complex-form', 'complex-success', 'Complex');
         setupForm('commercial-form', 'commercial-success', 'Commercial');
         setupForm('licenses-form', 'licenses-success', 'Licenses');
+        window.openPrivacyModal = function() { toggleModal('privacy-modal', true); };
+        window.closePrivacyModal = function() { toggleModal('privacy-modal', false); };
 
         // Мобильное меню из рабочей версии (эталон адаптации)
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');

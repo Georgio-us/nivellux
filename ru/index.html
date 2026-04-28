@@ -780,9 +780,32 @@
             
             <div class="border-t border-white/10 pt-8 text-center text-xs sm:text-sm text-gray-400 leading-relaxed">
                 &copy; 2026 NIVELLUX OBRAS S.L. | NIF: B24746745 | <span data-i18n="footer_rights">Все права защищены.</span>
+                <div class="mt-2">
+                    <button type="button" onclick="openPrivacyModal()" class="underline hover:text-white transition">Политика конфиденциальности</button>
+                </div>
             </div>
         </div>
     </footer>
+
+    <div id="privacy-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closePrivacyModal()"></div>
+        <div class="bg-white rounded-[32px] p-6 md:p-10 w-full max-w-4xl relative z-10 max-h-[95vh] overflow-y-auto shadow-2xl mx-4">
+            <button type="button" onclick="closePrivacyModal()" class="absolute top-6 right-6 text-gray-400 hover:text-brand-accent transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-3xl font-bold mb-4 text-brand-dark pr-8">Политика конфиденциальности</h3>
+            <div class="space-y-4 text-sm text-gray-600 leading-relaxed">
+                <p><strong>Responsable del tratamiento:</strong> NIVELLUX OBRAS S.L. (NIF: B24746745), Plaça Num 71 Res Urb, 51A, Benicalap, 46025 València, Valencia. Email: nivellux.slu@gmail.com. Teléfono: +34 664 791 777.</p>
+                <p><strong>Datos que recopilamos:</strong> nombre, teléfono, email y comentario enviado a través de los formularios del sitio web.</p>
+                <p><strong>Finalidad:</strong> gestión de solicitudes, elaboración de presupuestos, contacto comercial y seguimiento del servicio solicitado.</p>
+                <p><strong>Base jurídica:</strong> consentimiento del usuario y medidas precontractuales solicitadas por el interesado.</p>
+                <p><strong>Plazo de conservación:</strong> 12 meses o el periodo legalmente exigido, el que resulte mayor.</p>
+                <p><strong>Destinatarios:</strong> uso interno de la empresa y su sistema CRM para la gestión de clientes y solicitudes. No se venden datos a terceros.</p>
+                <p><strong>Cookies y analítica:</strong> este sitio puede usar cookies, Google Tag Manager, Google Analytics y píxeles publicitarios (incluido Meta) para medir tráfico y optimizar campañas.</p>
+                <p><strong>Derechos del usuario:</strong> puede solicitar acceso, rectificación, supresión, oposición o limitación del tratamiento escribiendo a nivellux.slu@gmail.com.</p>
+            </div>
+        </div>
+    </div>
 
 
     <div id="consultation-modal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
