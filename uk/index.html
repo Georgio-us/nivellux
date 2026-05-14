@@ -1095,5 +1095,21 @@
     </script>
     <script>window.NIVELLUX_LEADS_API_URL = 'https://nivellux-production.up.railway.app/api/leads';</script>
     <script src="/script.js" defer></script>
+<script>
+(()=>{
+  const s=document.createElement('script');
+  window.__VW_API_URL__='https://voice-widget-backend-estyle.up.railway.app/api/audio/upload';
+  window.__VW_LAUNCHER_SIDE__='left';
+  s.src='https://voice-widget-frontend-estyle.up.railway.app/loader.js';
+  s.onload=()=>VoiceWidget.init({
+    corner:'left-bottom',
+    launcherSide:'left',
+    offsetX:20,
+    offsetY:20,
+    zIndex:2147483646
+  });
+  document.head.appendChild(s);
+})();
+</script>
 </body>
 </html>
